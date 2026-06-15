@@ -5,244 +5,289 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>SHARDEN WAY — курс фотографии</title>
 <link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#090806">
+<meta name="theme-color" content="#f5f0e6">
 <link rel="icon" href="icon-192.png">
 <link rel="apple-touch-icon" href="icon-192.png">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Sharden Way">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Manrope:wght@300;400;500;600;700&family=Caveat:wght@500;600;700&display=swap" rel="stylesheet">
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
-html,body{height:100%;background:#090806;color:#ddd6c8;font-family:'DM Sans',sans-serif;overflow:hidden}
+html,body{height:100%;background:#f5f0e6;color:#2a2a2a;font-family:'Manrope',sans-serif;overflow:hidden}
 ::-webkit-scrollbar{width:3px}
-::-webkit-scrollbar-thumb{background:#241e17;border-radius:2px}
+::-webkit-scrollbar-thumb{background:#e3dbc9;border-radius:2px}
 button{cursor:pointer;font-family:inherit;transition:all .15s}
-textarea{font-family:'DM Sans',sans-serif;outline:none;resize:vertical;transition:border-color .2s}
-textarea:focus{border-color:#c8a96e!important}
+textarea{font-family:'Manrope',sans-serif;outline:none;resize:vertical;transition:border-color .2s}
+textarea:focus{border-color:#1e3a2c!important}
 
 /* ── Top nav ── */
-#topnav{display:flex;align-items:center;height:48px;border-bottom:1px solid #1e1812;padding:0 20px;gap:0;flex-shrink:0;background:#060401}
-.nav-brand{font-family:'DM Sans',sans-serif;font-size:12px;letter-spacing:3px;color:#c8a96e;margin-right:28px;white-space:nowrap;font-weight:500}
-.nav-tab{padding:0 18px;height:48px;border:none;background:none;color:#4a3e30;font-size:11px;letter-spacing:.8px;border-bottom:2px solid transparent;margin-bottom:-1px;text-transform:lowercase}
-.nav-tab:hover{color:#8a7a68}
-.nav-tab.active{color:#ddd6c8;border-bottom-color:#c8a96e}
+#topnav{display:flex;align-items:center;height:48px;border-bottom:1px solid #e3dbc9;padding:0 20px;gap:0;flex-shrink:0;background:#1e3a2c}
+.logo-stack{display:flex;flex-direction:column}
+.logo-main{font-family:'Playfair Display',serif;font-weight:700;line-height:1}
+.logo-sub{font-family:'Manrope',sans-serif;font-weight:500;line-height:1;opacity:.7}
+.nav-brand{color:#f5f0e6;margin-right:28px;white-space:nowrap}
+.nav-brand .logo-main{font-size:13px;letter-spacing:2px}
+.nav-brand .logo-sub{font-size:8px;letter-spacing:3px;margin-top:2px}
+.nav-tab{padding:0 18px;height:48px;border:none;background:none;color:#a89e8f;font-size:11px;letter-spacing:.8px;border-bottom:2px solid transparent;margin-bottom:-1px;text-transform:lowercase}
+.nav-tab:hover{color:#e3dbc9}
+.nav-tab.active{color:#f5f0e6;border-bottom-color:#cf93a8}
 .nav-spacer{flex:1}
-.nav-progress{font-size:11px;color:#3a3028}
+.nav-progress{font-size:11px;color:#b0a596}
 
 /* ── Shell ── */
 #shell{display:flex;height:calc(100vh - 48px);overflow:hidden}
 
 /* ── Sidebar ── */
-#sidebar{width:260px;min-width:260px;background:#060401;border-right:1px solid #1e1812;display:flex;flex-direction:column;overflow:hidden;transition:transform .28s cubic-bezier(.4,0,.2,1)}
-.sb-top{padding:22px 18px 18px;border-bottom:1px solid #1e1812;flex-shrink:0}
-.sb-course-label{font-size:9px;letter-spacing:3px;color:#2a2218;text-transform:uppercase;margin-bottom:5px}
-.sb-course-title{font-family:'DM Sans',sans-serif;font-size:13px;font-weight:500;letter-spacing:2px;margin-bottom:3px;color:#e8dfd0}
-.sb-course-sub{font-size:11px;color:#4a3e30;margin-bottom:14px;line-height:1.5}
+#sidebar{width:260px;min-width:260px;background:#1e3a2c;border-right:1px solid #e3dbc9;display:flex;flex-direction:column;overflow:hidden;transition:transform .28s cubic-bezier(.4,0,.2,1)}
+.sb-top{padding:22px 18px 18px;border-bottom:1px solid #e3dbc9;flex-shrink:0}
+.sb-course-label{font-size:9px;letter-spacing:3px;color:#b0a596;text-transform:uppercase;margin-bottom:5px}
+.sb-course-title{font-weight:500;margin-bottom:3px;color:#f5f0e6}
+.sb-course-title .logo-main{font-size:16px;letter-spacing:2px}
+.sb-course-title .logo-sub{font-size:9px;letter-spacing:3px;margin-top:3px}
+.sb-course-sub{font-size:11px;color:#8a8073;margin-bottom:14px;line-height:1.5}
 .sb-bar-wrap{display:flex;align-items:center;gap:8px}
-.sb-bar{flex:1;height:1px;background:#1e1812;border-radius:1px;overflow:hidden}
-.sb-bar-fill{height:100%;background:linear-gradient(90deg,#a8894e,#d4b678);border-radius:1px;transition:width .4s}
-.sb-pct{font-size:10px;color:#4a3e30}
+.sb-bar{flex:1;height:1px;background:#e3dbc9;border-radius:1px;overflow:hidden}
+.sb-bar-fill{height:100%;background:linear-gradient(90deg,#cf93a8,#e8b4c4);border-radius:1px;transition:width .4s}
+.sb-pct{font-size:10px;color:#8a8073}
 
 /* ── Overall task progress ── */
 .sb-progress{margin-bottom:16px}
 .sb-progress-top{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:7px}
-.sb-progress-label{font-size:9px;letter-spacing:2px;color:#2a2218;text-transform:uppercase}
-.sb-progress-pct{font-family:'Cormorant Garamond',serif;font-size:20px;color:#c8a96e;line-height:1}
-.sb-progress-bar{height:5px;background:#1e1812;border-radius:3px;overflow:hidden}
-.sb-progress-fill{height:100%;background:linear-gradient(90deg,#a8894e,#d4b678);border-radius:3px;transition:width .4s}
-.sb-progress-count{font-size:10px;color:#4a3e30;margin-top:7px}
+.sb-progress-label{font-size:9px;letter-spacing:2px;color:#b0a596;text-transform:uppercase}
+.sb-progress-pct{font-family:'Playfair Display',serif;font-size:20px;color:#e8b4c4;line-height:1}
+.sb-progress-bar{height:5px;background:#e3dbc9;border-radius:3px;overflow:hidden}
+.sb-progress-fill{height:100%;background:linear-gradient(90deg,#cf93a8,#e8b4c4);border-radius:3px;transition:width .4s}
+.sb-progress-count{font-size:10px;color:#8a8073;margin-top:7px}
 .topnav-progress-wrap{display:flex;align-items:center;gap:8px}
-.topnav-bar{width:60px;height:4px;background:#1e1812;border-radius:2px;overflow:hidden}
-.topnav-bar-fill{height:100%;background:linear-gradient(90deg,#a8894e,#d4b678);border-radius:2px;transition:width .4s}
+.topnav-bar{width:60px;height:4px;background:#e3dbc9;border-radius:2px;overflow:hidden}
+.topnav-bar-fill{height:100%;background:linear-gradient(90deg,#cf93a8,#e8b4c4);border-radius:2px;transition:width .4s}
 .sb-list{overflow-y:auto;flex:1;padding:8px 0}
-.sb-section-label{font-size:9px;letter-spacing:2px;color:#2a2218;text-transform:uppercase;padding:16px 18px 6px;margin-top:4px}
-.sb-mod{width:100%;background:none;border:none;text-align:left;padding:10px 18px;display:flex;align-items:center;gap:10px;color:#5a4e3c;border-left:2px solid transparent}
-.sb-mod:hover{background:#0d0a06;color:#9a8a76}
-.sb-mod.cur{background:#0d0a06;color:#e0d4c0;border-left-color:#c8a96e}
-.sb-mod-num{font-family:'Cormorant Garamond',serif;font-size:11px;color:#3a3028;flex-shrink:0;width:20px;text-align:right}
-.sb-mod.cur .sb-mod-num{color:#c8a96e}
+.sb-section-label{font-size:9px;letter-spacing:2px;color:#b0a596;text-transform:uppercase;padding:16px 18px 6px;margin-top:4px}
+.sb-mod{width:100%;background:none;border:none;text-align:left;padding:10px 18px;display:flex;align-items:center;gap:10px;color:#d9d2c4;border-left:2px solid transparent}
+.sb-mod:hover{background:#fdf0f4;color:#8a8073}
+.sb-mod.cur{background:#fdf0f4;color:#1e3a2c;border-left-color:#1e3a2c}
+.sb-mod-num{font-family:'Playfair Display',serif;font-size:11px;color:#b0a596;flex-shrink:0;width:20px;text-align:right}
+.sb-mod.cur .sb-mod-num{color:#1e3a2c}
 .sb-mod-info{flex:1;min-width:0}
 .sb-mod-name{font-size:12px;line-height:1.3;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.sb-mod-cnt{font-size:10px;color:#3a3028;margin-top:1px}
-.sb-mod.cur .sb-mod-cnt{color:#5a4e3c}
-.sb-done-mark{color:#a8894e;font-size:10px;flex-shrink:0}
-.sb-close-btn{display:none;position:absolute;top:10px;right:12px;background:none;border:none;color:#4a3e30;font-size:18px;line-height:1;padding:4px}
+.sb-mod-cnt{font-size:10px;color:#b0a596;margin-top:1px}
+.sb-mod.cur .sb-mod-cnt{color:#6b6258}
+.sb-done-mark{color:#cf93a8;font-size:10px;flex-shrink:0}
+.sb-close-btn{display:none;position:absolute;top:10px;right:12px;background:none;border:none;color:#8a8073;font-size:18px;line-height:1;padding:4px}
 
 /* ── Welcome page ── */
 .welcome-page{animation:fadeIn .3s ease}
-.welcome-hero{text-align:center;padding:60px 0 48px;border-bottom:1px solid #1e1812;margin-bottom:44px}
-.welcome-brand{font-family:'DM Sans',sans-serif;font-size:13px;letter-spacing:4px;color:#c8a96e;margin-bottom:18px;font-weight:500}
-.welcome-title{font-family:'Cormorant Garamond',serif;font-size:42px;font-weight:300;line-height:1.15;color:#ede5d8;margin-bottom:16px}
-.welcome-sub{font-size:14px;color:#5a4e3c;line-height:1.75;max-width:500px;margin:0 auto 32px}
-.welcome-start-btn{background:linear-gradient(135deg,#a8894e,#c8a96e);color:#060401;border:none;border-radius:6px;padding:14px 36px;font-size:12px;letter-spacing:1.5px;font-weight:500;text-transform:lowercase;cursor:pointer;transition:filter .15s}
+.welcome-hero{text-align:center;padding:60px 0 48px;border-bottom:1px solid #e3dbc9;margin-bottom:44px}
+.welcome-brand{color:#1e3a2c;margin-bottom:18px}
+.welcome-brand .logo-stack{align-items:center}
+.welcome-brand .logo-main{font-size:19px;letter-spacing:3px}
+.welcome-brand .logo-sub{font-size:10px;letter-spacing:4px;margin-top:4px}
+.welcome-title{font-family:'Playfair Display',serif;font-size:42px;font-weight:300;line-height:1.15;color:#1e3a2c;margin-bottom:16px}
+.welcome-sub{font-size:14px;color:#6b6258;line-height:1.75;max-width:500px;margin:0 auto 32px}
+.welcome-start-btn{background:linear-gradient(135deg,#cf93a8,#1e3a2c);color:#ffffff;border:none;border-radius:6px;padding:14px 36px;font-size:12px;letter-spacing:1.5px;font-weight:500;text-transform:lowercase;cursor:pointer;transition:filter .15s}
 .welcome-start-btn:hover{filter:brightness(1.08)}
 .welcome-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;margin-bottom:44px}
-.welcome-block{background:#0e0b08;border:1px solid #1e1812;border-radius:6px;padding:22px}
-.welcome-block-num{font-family:'Cormorant Garamond',serif;font-size:32px;font-weight:300;color:#2a2218;margin-bottom:8px;line-height:1}
-.welcome-block-title{font-size:12px;font-weight:500;color:#c8a96e;margin-bottom:8px;letter-spacing:.5px}
-.welcome-block-desc{font-size:12px;color:#5a4e3c;line-height:1.7}
-.welcome-footer{text-align:center;padding:32px 0 0;border-top:1px solid #1e1812}
-.welcome-footer-text{font-size:13px;color:#4a3e30;line-height:1.75}
-.welcome-footer-name{font-family:'Cormorant Garamond',serif;font-size:17px;color:#c8a96e;margin-top:10px}
+.welcome-block{background:#ffffff;border:1px solid #e3dbc9;border-radius:6px;padding:22px}
+.welcome-block-num{font-family:'Playfair Display',serif;font-size:32px;font-weight:300;color:#b0a596;margin-bottom:8px;line-height:1}
+.welcome-block-title{font-size:12px;font-weight:500;color:#1e3a2c;margin-bottom:8px;letter-spacing:.5px}
+.welcome-block-desc{font-size:12px;color:#6b6258;line-height:1.7}
+.welcome-footer{text-align:center;padding:32px 0 0;border-top:1px solid #e3dbc9}
+.welcome-footer-text{font-size:13px;color:#8a8073;line-height:1.75}
+.welcome-footer-name{font-family:'Caveat',cursive;font-weight:700;font-size:24px;color:#1e3a2c;margin-top:10px}
+
+/* ── Welcome hero v2 ── */
+.welcome-hero2{position:relative;background:#1e3a2c;border-radius:14px;padding:40px 36px;margin-bottom:24px;display:flex;align-items:center;justify-content:space-between;gap:28px;flex-wrap:wrap}
+.welcome-hero2-text{flex:1;min-width:220px}
+.welcome-greeting{font-family:'Caveat',cursive;font-weight:700;font-size:28px;color:#e8b4c4;margin-bottom:6px}
+.welcome-hero2-title{font-family:'Playfair Display',serif;font-weight:300;font-size:30px;line-height:1.25;color:#f5f0e6;margin-bottom:10px}
+.welcome-hero2-sub{font-size:12px;color:#c7d3cb;line-height:1.7;margin-bottom:24px}
+.welcome-hero2-btn{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,#e8b4c4,#cf93a8);color:#1e3a2c;border:none;border-radius:30px;padding:12px 28px;font-size:11px;letter-spacing:2px;font-weight:600;text-transform:uppercase;cursor:pointer;transition:filter .15s}
+.welcome-hero2-btn:hover{filter:brightness(1.05)}
+.welcome-hero2-art{flex-shrink:0;width:130px;height:150px;background:#f5f0e6;border-radius:10px;display:flex;align-items:center;justify-content:center;transform:rotate(7deg);font-size:40px;padding:8px}
+.welcome-hero2-art img{width:100%;height:100%;object-fit:cover;border-radius:6px;display:block}
+
+/* ── Module progress cards ── */
+.welcome-pgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;margin-bottom:32px}
+.welcome-pcard{background:#ffffff;border:1px solid #e3dbc9;border-radius:12px;padding:20px;cursor:pointer;transition:border-color .15s;text-align:left}
+.welcome-pcard:hover{border-color:#cf93a8}
+.welcome-pcard-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:14px;gap:10px}
+.welcome-pcard-badge{font-size:9px;letter-spacing:1.5px;text-transform:uppercase;padding:5px 12px;border-radius:20px;font-weight:600;white-space:nowrap}
+.welcome-pcard-badge.done{background:#1e3a2c;color:#f5f0e6}
+.welcome-pcard-badge.progress{background:#e8b4c4;color:#1e3a2c}
+.welcome-pcard-status{font-size:10px;color:#b0a596;letter-spacing:1px;text-transform:uppercase;text-align:right}
+.welcome-pcard-title{font-family:'Playfair Display',serif;font-size:18px;font-weight:400;color:#1e3a2c;margin-bottom:14px;line-height:1.3}
+.welcome-pcard-bar{height:6px;background:#f0ece1;border-radius:3px;overflow:hidden}
+.welcome-pcard-fill{height:100%;border-radius:3px}
+.welcome-pcard-fill.pink{background:linear-gradient(90deg,#cf93a8,#e8b4c4)}
+.welcome-pcard-fill.green{background:#1e3a2c}
+
+/* ── Decorative stripes ── */
+.welcome-stripes{height:14px;border-radius:7px;margin:8px 0 36px;background:repeating-linear-gradient(135deg,#1e3a2c 0 14px,#e8b4c4 14px 28px)}
 
 /* ── Content ── */
-#content-area{flex:1;overflow-y:auto;background:#090806}
+#content-area{flex:1;overflow-y:auto;background:#f5f0e6}
 .content-inner{max-width:680px;margin:0 auto;padding:40px 36px 100px}
 
 /* ── Module header ── */
-.mod-hdr{margin-bottom:36px;padding-bottom:28px;border-bottom:1px solid #1e1812}
-.mod-nav-line{font-size:10px;color:#3a3028;margin-bottom:16px;letter-spacing:1.5px}
-.mod-nav-num{color:#c8a96e}
-.mod-h1{font-family:'Cormorant Garamond',serif;font-size:36px;font-weight:300;line-height:1.15;margin-bottom:12px;color:#ede5d8}
-.mod-sub{font-size:13px;color:#5a4e3c;line-height:1.7}
-.done-badge{display:inline-flex;align-items:center;gap:6px;background:#0a120a;border:1px solid #1a2e1a;border-radius:20px;padding:5px 14px;font-size:11px;color:#5a8a5a;margin-bottom:20px}
+.mod-hdr{margin-bottom:36px;padding-bottom:28px;border-bottom:1px solid #e3dbc9}
+.mod-nav-line{font-size:10px;color:#b0a596;margin-bottom:16px;letter-spacing:1.5px}
+.mod-nav-num{color:#1e3a2c}
+.mod-h1{font-family:'Playfair Display',serif;font-size:36px;font-weight:300;line-height:1.15;margin-bottom:12px;color:#1e3a2c}
+.mod-sub{font-size:13px;color:#6b6258;line-height:1.7}
+.done-badge{display:inline-flex;align-items:center;gap:6px;background:#eaf3ec;border:1px solid #c8e0cf;border-radius:20px;padding:5px 14px;font-size:11px;color:#3a6b4a;margin-bottom:20px}
 
 /* ── Tabs ── */
-.tabs-bar{display:flex;gap:0;border-bottom:1px solid #1e1812;margin-bottom:28px;overflow-x:auto}
+.tabs-bar{display:flex;gap:0;border-bottom:1px solid #e3dbc9;margin-bottom:28px;overflow-x:auto}
 .tabs-bar::-webkit-scrollbar{display:none}
-.tbtab{padding:10px 18px;font-size:11px;letter-spacing:.8px;border:none;background:none;color:#3a3028;border-bottom:2px solid transparent;margin-bottom:-1px;white-space:nowrap;text-transform:lowercase}
-.tbtab:hover{color:#6a5e4c}
-.tbtab.active{color:#c8a96e;border-bottom-color:#c8a96e}
+.tbtab{padding:10px 18px;font-size:11px;letter-spacing:.8px;border:none;background:none;color:#b0a596;border-bottom:2px solid transparent;margin-bottom:-1px;white-space:nowrap;text-transform:lowercase}
+.tbtab:hover{color:#4a443c}
+.tbtab.active{color:#1e3a2c;border-bottom-color:#1e3a2c}
 
 /* ── Theory ── */
-.theory-card{background:#0e0b08;border:1px solid #1e1812;border-radius:6px;padding:28px;margin-bottom:16px;animation:fadeIn .25s ease;position:relative}
-.theory-card::before{content:'';position:absolute;left:0;top:24px;bottom:24px;width:2px;background:linear-gradient(to bottom,transparent,#c8a96e55,transparent);border-radius:1px}
-.theory-card-h{font-family:'Cormorant Garamond',serif;font-size:22px;font-weight:400;margin-bottom:16px;color:#ede5d8;line-height:1.2}
-.theory-card-b{font-size:13.5px;line-height:1.95;color:#7a6e5c;white-space:pre-wrap}
-.task-scheme-img{width:100%;border-radius:5px;margin:12px 0 16px;border:1px solid #1e1812;display:block}
+.theory-card{background:#ffffff;border:1px solid #e3dbc9;border-radius:6px;padding:28px;margin-bottom:16px;animation:fadeIn .25s ease;position:relative}
+.theory-card::before{content:'';position:absolute;left:0;top:24px;bottom:24px;width:2px;background:linear-gradient(to bottom,transparent,#1e3a2c55,transparent);border-radius:1px}
+.theory-card-h{font-family:'Playfair Display',serif;font-size:22px;font-weight:400;margin-bottom:16px;color:#1e3a2c;line-height:1.2}
+.theory-card-b{font-size:13.5px;line-height:1.95;color:#5a534a;white-space:pre-wrap}
+.task-scheme-img{width:100%;border-radius:5px;margin:12px 0 16px;border:1px solid #e3dbc9;display:block}
 .theory-imgs{display:flex;flex-direction:column;gap:12px;margin:16px 0 4px}
-.theory-img{width:100%;border-radius:5px;border:1px solid #1e1812;display:block}
-.theory-quote{margin:24px -28px -28px;padding:24px 32px;background:#0c0906;border-top:1px solid #1e1812;border-radius:0 0 6px 6px;text-align:center}
-.theory-quote-t{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:18px;color:#c8a96e;line-height:1.65;display:block}
-.theory-quote-s{font-size:10px;color:#3a3028;margin-top:10px;letter-spacing:2px;display:block;text-transform:uppercase}
+.theory-img{width:100%;border-radius:5px;border:1px solid #e3dbc9;display:block}
+.theory-quote{margin:24px -28px -28px;padding:24px 32px;background:#faf3f6;border-top:1px solid #e3dbc9;border-radius:0 0 6px 6px;text-align:center}
+.theory-quote-t{font-family:'Playfair Display',serif;font-style:italic;font-size:18px;color:#1e3a2c;line-height:1.65;display:block}
+.theory-quote-s{font-size:10px;color:#b0a596;margin-top:10px;letter-spacing:2px;display:block;text-transform:uppercase}
 
 /* ── Quiz ── */
-.quiz-block{background:#0e0b08;border:1px solid #1e1812;border-radius:6px;padding:28px;margin-bottom:16px}
-.quiz-title{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:400;color:#ede5d8;margin-bottom:4px}
-.quiz-sub{font-size:12px;color:#4a3e30;margin-bottom:22px}
+.quiz-block{background:#ffffff;border:1px solid #e3dbc9;border-radius:6px;padding:28px;margin-bottom:16px}
+.quiz-title{font-family:'Playfair Display',serif;font-size:20px;font-weight:400;color:#1e3a2c;margin-bottom:4px}
+.quiz-sub{font-size:12px;color:#8a8073;margin-bottom:22px}
 .quiz-q{margin-bottom:22px}
 .quiz-q:last-child{margin-bottom:0}
-.quiz-q-text{font-size:13.5px;color:#ddd6c8;margin-bottom:10px;line-height:1.6}
-.quiz-opt{display:block;width:100%;text-align:left;background:#070504;border:1px solid #1e1812;border-radius:5px;color:#7a6e5c;font-size:12.5px;line-height:1.6;padding:11px 14px;margin-bottom:8px;font-family:'DM Sans',sans-serif}
-.quiz-opt:hover{border-color:#3a3028}
-.quiz-opt.selected{border-color:#c8a96e;color:#ddd6c8}
-.quiz-opt.correct{border-color:#3a5a3a;background:#0a120a;color:#8fc78f}
-.quiz-opt.wrong{border-color:#5a3a3a;background:#120a0a;color:#c78f8f}
+.quiz-q-text{font-size:13.5px;color:#2a2a2a;margin-bottom:10px;line-height:1.6}
+.quiz-opt{display:block;width:100%;text-align:left;background:#ffffff;border:1px solid #e3dbc9;border-radius:5px;color:#5a534a;font-size:12.5px;line-height:1.6;padding:11px 14px;margin-bottom:8px;font-family:'Manrope',sans-serif}
+.quiz-opt:hover{border-color:#b0a596}
+.quiz-opt.selected{border-color:#1e3a2c;color:#2a2a2a}
+.quiz-opt.correct{border-color:#3a5a3a;background:#eaf3ec;color:#2e6b44}
+.quiz-opt.wrong{border-color:#a8d0b4;background:#fbeaec;color:#b8526a}
 .quiz-opt:disabled{cursor:default}
 .quiz-feedback{font-size:12px;margin-top:4px;line-height:1.6}
-.quiz-feedback.ok{color:#8fc78f}
-.quiz-feedback.no{color:#c78f8f}
+.quiz-feedback.ok{color:#2e6b44}
+.quiz-feedback.no{color:#b8526a}
 
 /* ── Tracker ── */
 .tracker-wrap{margin:14px 0 4px}
 .tracker-days{display:flex;gap:6px;margin-bottom:8px}
-.tracker-day{flex:1;aspect-ratio:1;border:1px solid #1e1812;border-radius:5px;background:#070504;color:#3a3028;font-size:11px;display:flex;align-items:center;justify-content:center;font-family:'DM Sans',sans-serif}
-.tracker-day.on{background:#0a120a;border-color:#1a2e1a;color:#5a8a5a}
-.tracker-bar{height:3px;background:#1e1812;border-radius:2px;overflow:hidden}
-.tracker-fill{height:100%;background:linear-gradient(135deg,#a8894e,#c8a96e);transition:width .25s ease}
-.tracker-label{font-size:10px;color:#3a3028;letter-spacing:1px;text-transform:uppercase;margin-top:6px}
+.tracker-day{flex:1;aspect-ratio:1;border:1px solid #e3dbc9;border-radius:5px;background:#ffffff;color:#b0a596;font-size:11px;display:flex;align-items:center;justify-content:center;font-family:'Manrope',sans-serif}
+.tracker-day.on{background:#eaf3ec;border-color:#c8e0cf;color:#3a6b4a}
+.tracker-bar{height:3px;background:#e3dbc9;border-radius:2px;overflow:hidden}
+.tracker-fill{height:100%;background:linear-gradient(135deg,#cf93a8,#1e3a2c);transition:width .25s ease}
+.tracker-label{font-size:10px;color:#b0a596;letter-spacing:1px;text-transform:uppercase;margin-top:6px}
 
 /* ── Tasks ── */
-.task-card{background:#0e0b08;border:1px solid #1e1812;border-radius:6px;padding:22px;margin-bottom:14px;transition:border-color .15s;animation:fadeIn .2s ease}
-.task-card:hover{border-color:#2a2418}
+.task-card{background:#ffffff;border:1px solid #e3dbc9;border-radius:6px;padding:22px;margin-bottom:14px;transition:border-color .15s;animation:fadeIn .2s ease}
+.task-card:hover{border-color:#e3cdd6}
 .task-row{display:flex;gap:12px;align-items:flex-start;margin-bottom:14px}
-.task-cb{width:18px;height:18px;border:1px solid #2a2418;border-radius:4px;background:none;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:10px;color:#c8a96e;transition:all .15s}
-.task-cb.on{background:#c8a96e;border-color:#c8a96e;color:#060401}
-.task-title{font-size:13px;font-weight:500;line-height:1.4;color:#ddd6c8}
-.task-desc{font-size:13px;color:#5a4e3c;line-height:1.85;white-space:pre-wrap;margin-bottom:14px}
-.task-tip{font-size:12px;color:#4a6a3a;background:#080e06;border:1px solid #16240e;border-radius:5px;padding:10px 14px;line-height:1.65;margin-bottom:12px}
-.task-tip::before{content:"→ ";color:#5a8a4a}
-.ans-label{font-size:9px;letter-spacing:2px;color:#2a2218;text-transform:uppercase;margin-bottom:7px}
-.ans-box{width:100%;background:#070504;border:1px solid #1e1812;border-radius:5px;color:#7a6e5c;font-size:13px;line-height:1.75;padding:11px 14px;min-height:90px}
-.copy-btn{font-size:10px;color:#3a3028;background:none;border:1px solid #1e1812;border-radius:4px;padding:5px 12px;margin-top:8px;text-transform:lowercase}
-.copy-btn:hover{border-color:#2a2418;color:#7a6e5c}
-.copy-ok{font-size:11px;color:#c8a96e;margin-left:8px}
+.task-cb{width:18px;height:18px;border:1px solid #e3cdd6;border-radius:4px;background:none;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:10px;color:#1e3a2c;transition:all .15s}
+.task-cb.on{background:#1e3a2c;border-color:#1e3a2c;color:#ffffff}
+.task-title{font-size:13px;font-weight:500;line-height:1.4;color:#2a2a2a}
+.task-desc{font-size:13px;color:#6b6258;line-height:1.85;white-space:pre-wrap;margin-bottom:14px}
+.task-tip{font-size:12px;color:#3a6b4a;background:#eaf3ec;border:1px solid #c8e0cf;border-radius:5px;padding:10px 14px;line-height:1.65;margin-bottom:12px}
+.task-tip::before{content:"→ ";color:#3a6b4a}
+.ans-label{font-size:9px;letter-spacing:2px;color:#b0a596;text-transform:uppercase;margin-bottom:7px}
+.ans-box{width:100%;background:#ffffff;border:1px solid #e3dbc9;border-radius:5px;color:#5a534a;font-size:13px;line-height:1.75;padding:11px 14px;min-height:90px}
+.copy-btn{font-size:10px;color:#b0a596;background:none;border:1px solid #e3dbc9;border-radius:4px;padding:5px 12px;margin-top:8px;text-transform:lowercase}
+.copy-btn:hover{border-color:#e3cdd6;color:#5a534a}
+.copy-ok{font-size:11px;color:#1e3a2c;margin-left:8px}
 
 /* ── Complete btn ── */
 .cmp-btn{width:100%;padding:14px;border:none;border-radius:6px;font-size:12px;letter-spacing:.8px;margin-top:22px;text-transform:lowercase}
-.cmp-btn.ready{background:linear-gradient(135deg,#a8894e,#c8a96e);color:#060401;font-weight:500}
+.cmp-btn.ready{background:linear-gradient(135deg,#cf93a8,#1e3a2c);color:#ffffff;font-weight:500}
 .cmp-btn.ready:hover{filter:brightness(1.08)}
-.cmp-btn.locked{background:#0e0b08;color:#2a2218}
+.cmp-btn.locked{background:#ffffff;color:#b0a596}
 
 /* ── Schedule ── */
-.sched-intro{font-size:13px;color:#5a4e3c;line-height:1.75;margin-bottom:22px}
-.sched-week{background:#0e0b08;border:1px solid #1e1812;border-radius:6px;padding:20px;margin-bottom:10px}
-.sched-wnum{font-size:10px;letter-spacing:2px;color:#c8a96e;text-transform:lowercase;margin-bottom:12px}
-.sched-cols{display:flex;gap:20px}
-.sched-col-h{font-size:9px;letter-spacing:2px;color:#3a3028;text-transform:lowercase;margin-bottom:8px}
-.sched-item{font-size:12px;color:#7a6e5c;margin-bottom:6px;display:flex;gap:7px}
-.sched-arrow{color:#2a2418;flex-shrink:0}
+.sched-intro{font-size:13px;color:#6b6258;line-height:1.75;margin-bottom:14px}
+.sched-progress{font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:#1e3a2c;font-weight:500;margin-bottom:22px}
+.sched-block{background:#ffffff;border:1px solid #e3dbc9;border-radius:6px;padding:18px 20px;margin-bottom:10px}
+.sched-block-h{font-size:9px;letter-spacing:2px;color:#b0a596;text-transform:uppercase;margin-bottom:10px}
+.sched-item{font-size:12px;color:#5a534a;margin-bottom:2px;display:flex;gap:8px;align-items:baseline;padding:6px 8px;border-radius:5px;cursor:pointer;transition:background .12s}
+.sched-item:hover{background:#f5f0e6}
+.sched-check{flex-shrink:0;color:#cf93a8;font-size:11px}
+.sched-item.done{color:#b0a596;text-decoration:line-through}
+.sched-item.done .sched-check{color:#3a6b4a;text-decoration:none}
+.sched-item-meta{color:#b0a596;font-size:11px}
 
 /* ── Watchlist ── */
 #watchlist{display:none;flex:1;overflow:hidden;flex-direction:column}
 .wl-inner{flex:1;overflow-y:auto;padding:36px}
-.wl-tabs-bar{display:flex;gap:0;border-bottom:1px solid #1e1812;margin-bottom:30px}
-.wl-tab{padding:10px 20px;font-size:11px;letter-spacing:.8px;border:none;background:none;color:#3a3028;border-bottom:2px solid transparent;margin-bottom:-1px;text-transform:lowercase}
-.wl-tab:hover{color:#6a5e4c}
-.wl-tab.active{color:#c8a96e;border-bottom-color:#c8a96e}
+.wl-tabs-bar{display:flex;gap:0;border-bottom:1px solid #e3dbc9;margin-bottom:30px}
+.wl-tab{padding:10px 20px;font-size:11px;letter-spacing:.8px;border:none;background:none;color:#b0a596;border-bottom:2px solid transparent;margin-bottom:-1px;text-transform:lowercase}
+.wl-tab:hover{color:#4a443c}
+.wl-tab.active{color:#1e3a2c;border-bottom-color:#1e3a2c}
 
 /* ── Contact ── */
 .contact-inner{flex:1;overflow-y:auto;padding:36px;display:flex;align-items:center;justify-content:center}
 .contact-box{max-width:440px;text-align:center}
-.contact-title{font-family:'Cormorant Garamond',serif;font-size:30px;font-weight:300;color:#ede5d8;margin-bottom:14px}
-.contact-text{font-size:13.5px;line-height:1.9;color:#7a6e5c;margin-bottom:28px}
-.contact-link{display:inline-block;padding:13px 30px;border:1px solid #c8a96e;border-radius:4px;color:#c8a96e;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;text-decoration:none;transition:.2s}
-.contact-link:hover{background:#c8a96e;color:#0c0906}
-.contact-email{margin-top:18px;font-size:12px;color:#4a3e30;letter-spacing:.5px}
-.wl-section-title{font-family:'Cormorant Garamond',serif;font-size:26px;font-weight:300;margin-bottom:8px;color:#ede5d8}
-.wl-section-desc{font-size:13px;color:#5a4e3c;line-height:1.65;margin-bottom:22px}
+.contact-title{font-family:'Playfair Display',serif;font-size:30px;font-weight:300;color:#1e3a2c;margin-bottom:14px}
+.contact-text{font-size:13.5px;line-height:1.9;color:#5a534a;margin-bottom:28px}
+.contact-link{display:inline-block;padding:13px 30px;border:1px solid #1e3a2c;border-radius:4px;color:#1e3a2c;font-size:11px;letter-spacing:1.5px;text-transform:uppercase;text-decoration:none;transition:.2s}
+.contact-link:hover{background:#1e3a2c;color:#faf3f6}
+.contact-email{margin-top:18px;font-size:12px;color:#8a8073;letter-spacing:.5px}
+.wl-section-title{font-family:'Playfair Display',serif;font-size:26px;font-weight:300;margin-bottom:8px;color:#1e3a2c}
+.wl-section-desc{font-size:13px;color:#6b6258;line-height:1.65;margin-bottom:22px}
 .film-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px;margin-bottom:30px}
-.film-card{background:#0e0b08;border:1px solid #1e1812;border-radius:6px;padding:20px;cursor:pointer;transition:border-color .15s}
-.film-card:hover{border-color:#2a2418}
-.film-card.open{border-color:#c8a96e33;background:#110e0a}
-.film-year{font-size:10px;color:#3a3028;letter-spacing:1px;margin-bottom:7px}
-.film-title{font-family:'Cormorant Garamond',serif;font-size:17px;font-weight:400;margin-bottom:4px;color:#e8dfd0}
-.film-dir{font-size:11px;color:#4a3e30;margin-bottom:11px}
-.film-why{font-size:12px;color:#5a4e3c;line-height:1.75}
-.film-tasks{margin-top:16px;padding-top:16px;border-top:1px solid #1e1812;display:none}
+.film-card{background:#ffffff;border:1px solid #e3dbc9;border-radius:6px;padding:20px;cursor:pointer;transition:border-color .15s}
+.film-card:hover{border-color:#e3cdd6}
+.film-card.open{border-color:#1e3a2c33;background:#fdf0f4}
+.film-year{font-size:10px;color:#b0a596;letter-spacing:1px;margin-bottom:7px}
+.film-title{font-family:'Playfair Display',serif;font-size:17px;font-weight:400;margin-bottom:4px;color:#1e3a2c}
+.film-dir{font-size:11px;color:#8a8073;margin-bottom:11px}
+.film-why{font-size:12px;color:#6b6258;line-height:1.75}
+.film-tasks{margin-top:16px;padding-top:16px;border-top:1px solid #e3dbc9;display:none}
 .film-card.open .film-tasks{display:block}
-.film-task-item{font-size:12px;color:#4a3e30;line-height:1.75;margin-bottom:12px;display:flex;gap:8px}
-.film-task-num{color:#a8894e;flex-shrink:0;font-size:11px;margin-top:1px}
-.wl-block-header{margin-bottom:22px;padding-bottom:18px;border-bottom:1px solid #1e1812}
+.film-task-item{font-size:12px;color:#8a8073;line-height:1.75;margin-bottom:12px;display:flex;gap:8px}
+.film-task-num{color:#cf93a8;flex-shrink:0;font-size:11px;margin-top:1px}
+.wl-block-header{margin-bottom:22px;padding-bottom:18px;border-bottom:1px solid #e3dbc9}
 .ph-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:12px}
-.ph-card{background:#0e0b08;border:1px solid #1e1812;border-radius:6px;padding:20px;cursor:pointer;transition:border-color .15s}
-.ph-card:hover{border-color:#2a2418}
-.ph-card.open{border-color:#c8a96e33;background:#110e0a}
-.ph-cat{font-size:9px;letter-spacing:2px;color:#3a3028;text-transform:uppercase;margin-bottom:7px}
-.ph-name{font-family:'Cormorant Garamond',serif;font-size:20px;font-weight:400;margin-bottom:4px;color:#e8dfd0}
-.ph-years{font-size:11px;color:#3a3028;margin-bottom:11px}
-.ph-why{font-size:12px;color:#5a4e3c;line-height:1.75}
-.ph-tasks{margin-top:16px;padding-top:16px;border-top:1px solid #1e1812;display:none}
+.ph-card{background:#ffffff;border:1px solid #e3dbc9;border-radius:6px;padding:20px;cursor:pointer;transition:border-color .15s}
+.ph-card:hover{border-color:#e3cdd6}
+.ph-card.open{border-color:#1e3a2c33;background:#fdf0f4}
+.ph-cat{font-size:9px;letter-spacing:2px;color:#b0a596;text-transform:uppercase;margin-bottom:7px}
+.ph-name{font-family:'Playfair Display',serif;font-size:20px;font-weight:400;margin-bottom:4px;color:#1e3a2c}
+.ph-years{font-size:11px;color:#b0a596;margin-bottom:11px}
+.ph-why{font-size:12px;color:#6b6258;line-height:1.75}
+.ph-tasks{margin-top:16px;padding-top:16px;border-top:1px solid #e3dbc9;display:none}
 .ph-card.open .ph-tasks{display:block}
-.ph-task-item{font-size:12px;color:#4a3e30;line-height:1.75;margin-bottom:12px;display:flex;gap:8px}
-.ph-task-num{color:#a8894e;flex-shrink:0;font-size:11px;margin-top:1px}
+.ph-task-item{font-size:12px;color:#8a8073;line-height:1.75;margin-bottom:12px;display:flex;gap:8px}
+.ph-task-num{color:#cf93a8;flex-shrink:0;font-size:11px;margin-top:1px}
 
 /* ── Toast ── */
-#toast{position:fixed;top:16px;left:50%;transform:translateX(-50%);background:#180a0a;border:1px solid #5a2020;color:#b86060;padding:10px 22px;border-radius:6px;font-size:12px;z-index:999;display:none;white-space:nowrap}
+#toast{position:fixed;top:16px;left:50%;transform:translateX(-50%);background:#fdf0f3;border:1px solid #e8aebb;color:#c4506a;padding:10px 22px;border-radius:6px;font-size:12px;z-index:999;display:none;white-space:nowrap}
 
 /* ── Auth screen ── */
-#auth-screen{position:fixed;inset:0;background:#090806;z-index:9999;display:flex;align-items:center;justify-content:center}
-.auth-box{max-width:400px;width:90%;text-align:center;padding:52px 40px;background:#0e0b08;border:1px solid #1e1812;border-radius:8px}
-.auth-logo{font-family:'DM Sans',sans-serif;font-size:16px;color:#c8a96e;margin-bottom:8px;letter-spacing:4px;font-weight:500}
-.auth-sub{font-size:11px;color:#3a3028;margin-bottom:40px;letter-spacing:2px;text-transform:lowercase}
-.auth-label{font-size:9px;letter-spacing:2px;color:#3a3028;text-transform:uppercase;margin-bottom:10px;text-align:left}
-.auth-input{width:100%;background:#070504;border:1px solid #1e1812;border-radius:5px;color:#ddd6c8;font-size:15px;letter-spacing:4px;padding:14px 16px;text-align:center;text-transform:uppercase;outline:none;margin-bottom:14px;font-family:'DM Sans',sans-serif;transition:border-color .2s}
-.auth-input:focus{border-color:#c8a96e}
-.auth-btn{width:100%;padding:14px;border:none;border-radius:6px;font-size:12px;letter-spacing:1px;background:linear-gradient(135deg,#a8894e,#c8a96e);color:#060401;font-weight:500;cursor:pointer;transition:filter .15s;margin-bottom:24px;text-transform:lowercase}
+#auth-screen{position:fixed;inset:0;background:#f5f0e6;z-index:9999;display:flex;align-items:center;justify-content:center}
+.auth-box{max-width:400px;width:90%;text-align:center;padding:52px 40px;background:#ffffff;border:1px solid #e3dbc9;border-radius:8px}
+.auth-logo{color:#1e3a2c;margin-bottom:8px}
+.auth-logo .logo-stack{align-items:center}
+.auth-logo .logo-main{font-size:23px;letter-spacing:3px}
+.auth-logo .logo-sub{font-size:10px;letter-spacing:5px;margin-top:5px}
+.auth-sub{font-size:11px;color:#b0a596;margin-bottom:40px;letter-spacing:2px;text-transform:lowercase}
+.auth-label{font-size:9px;letter-spacing:2px;color:#b0a596;text-transform:uppercase;margin-bottom:10px;text-align:left}
+.auth-input{width:100%;background:#ffffff;border:1px solid #e3dbc9;border-radius:5px;color:#2a2a2a;font-size:15px;letter-spacing:4px;padding:14px 16px;text-align:center;text-transform:uppercase;outline:none;margin-bottom:14px;font-family:'Manrope',sans-serif;transition:border-color .2s}
+.auth-input:focus{border-color:#1e3a2c}
+.auth-btn{width:100%;padding:14px;border:none;border-radius:6px;font-size:12px;letter-spacing:1px;background:linear-gradient(135deg,#cf93a8,#1e3a2c);color:#ffffff;font-weight:500;cursor:pointer;transition:filter .15s;margin-bottom:24px;text-transform:lowercase}
 .auth-btn:hover{filter:brightness(1.08)}
-.auth-hint{font-size:12px;color:#3a3028;line-height:1.85}
-.auth-hint a{color:#a8894e;text-decoration:none}
-.auth-err{font-size:12px;color:#b86060;margin-bottom:12px;min-height:18px}
-.auth-loading{font-size:12px;color:#4a3e30;margin-bottom:12px}
+.auth-hint{font-size:12px;color:#b0a596;line-height:1.85}
+.auth-hint a{color:#cf93a8;text-decoration:none}
+.auth-err{font-size:12px;color:#c4506a;margin-bottom:12px;min-height:18px}
+.auth-loading{font-size:12px;color:#8a8073;margin-bottom:12px}
 
 /* ── Mobile ── */
-#mob-bar{display:none;align-items:center;gap:11px;padding:10px 16px;background:#060401;border-bottom:1px solid #1e1812;flex-shrink:0;position:sticky;top:0;z-index:40}
+#mob-bar{display:none;align-items:center;gap:11px;padding:10px 16px;background:#1e3a2c;border-bottom:1px solid #e3dbc9;flex-shrink:0;position:sticky;top:0;z-index:40}
 #backdrop{position:fixed;inset:0;background:rgba(0,0,0,.8);z-index:99;display:none}
-.ham{display:flex;flex-direction:column;gap:4px;width:34px;height:34px;background:#0e0b08;border:1px solid #1e1812;border-radius:5px;align-items:center;justify-content:center;flex-shrink:0}
-.ham:hover{background:#141008}
-.ham-line{width:14px;height:1px;background:#4a3e30;border-radius:1px}
-#mob-title{font-family:'Cormorant Garamond',serif;font-size:14px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1;color:#ede5d8}
+.ham{display:flex;flex-direction:column;gap:4px;width:34px;height:34px;background:#ffffff;border:1px solid #e3dbc9;border-radius:5px;align-items:center;justify-content:center;flex-shrink:0}
+.ham:hover{background:#ece4d6}
+.ham-line{width:14px;height:1px;background:#8a8073;border-radius:1px}
+#mob-title{font-family:'Playfair Display',serif;font-size:14px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1;color:#f5f0e6}
 
 @keyframes fadeIn{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}
 
@@ -264,7 +309,7 @@ textarea:focus{border-color:#c8a96e!important}
 <!-- Auth screen -->
 <div id="auth-screen">
   <div class="auth-box">
-    <div class="auth-logo">SHARDEN WAY</div>
+    <div class="auth-logo"><div class="logo-stack"><span class="logo-main">SHARDEN</span><span class="logo-sub">— WAY —</span></div></div>
     <div class="auth-sub">курс фотографии</div>
     <div class="auth-label">Код доступа</div>
     <input class="auth-input" id="auth-input" type="text" maxlength="12"
@@ -285,7 +330,7 @@ textarea:focus{border-color:#c8a96e!important}
 
 <!-- Top nav -->
 <div id="topnav">
-  <div class="nav-brand">SHARDEN WAY</div>
+  <div class="nav-brand"><div class="logo-stack"><span class="logo-main">SHARDEN</span><span class="logo-sub">— WAY —</span></div></div>
   <button class="nav-tab active" id="nav-course" onclick="switchSection('course')">курс</button>
   <button class="nav-tab" id="nav-watchlist" onclick="switchSection('watchlist')">база насмотренности</button>
   <button class="nav-tab" id="nav-contact" onclick="switchSection('contact')">связаться</button>
@@ -304,7 +349,7 @@ textarea:focus{border-color:#c8a96e!important}
     <button class="sb-close-btn" onclick="closeSb()">✕</button>
     <div id="sb-top" class="sb-top">
       <div class="sb-course-label">профессиональный курс</div>
-      <div class="sb-course-title" onclick="goTo(-1)" style="cursor:pointer">SHARDEN WAY</div>
+      <div class="sb-course-title" onclick="goTo(-1)" style="cursor:pointer"><div class="logo-stack"><span class="logo-main">SHARDEN</span><span class="logo-sub">— WAY —</span></div></div>
       <div class="sb-course-sub">фотография — от взгляда до профессии</div>
       <div class="sb-progress">
         <div class="sb-progress-top">
@@ -337,8 +382,8 @@ textarea:focus{border-color:#c8a96e!important}
 
   <!-- Watchlist section -->
   <div id="watchlist-section" style="display:none;flex:1;overflow:hidden;flex-direction:column">
-    <div id="wl-mob-bar" style="display:none;align-items:center;gap:11px;padding:10px 16px;background:#060609;border-bottom:1px solid #141420;flex-shrink:0">
-      <div style="font-family:'Cormorant Garamond',serif;font-size:15px;color:#c8a96e">База насмотренности</div>
+    <div id="wl-mob-bar" style="display:none;align-items:center;gap:11px;padding:10px 16px;background:#1e3a2c;border-bottom:1px solid #345648;flex-shrink:0">
+      <div style="font-family:'Playfair Display',serif;font-size:15px;color:#f5f0e6">База насмотренности</div>
     </div>
     <div class="wl-inner" id="watchlist-content"></div>
   </div>
@@ -424,7 +469,7 @@ const MODULES = [{
   }],
   quiz: [{
     q: "ты смотришь на фото и думаешь «круто, нравится» — но не можешь объяснить почему. на каком уровне ты сейчас находишься?",
-    options: ["третий — ты поняла решение автора", "первый — увидела, что изображено, но не разобрала как и почему", "второй — оценила свет и композицию"],
+    options: ["третий — ты понял(а) решение автора", "первый — увидел(а), что изображено, но не разобрал(а) как и почему", "второй — оценил(а) свет и композицию"],
     correct: 1
   }, {
     q: "какое из этих действий — пример активного просмотра?",
@@ -471,7 +516,7 @@ const MODULES = [{
     photo: true
   }, {
     t: "найди рембрандта",
-    d: "найди или создай освещение рембрандта — треугольник света на щеке в тени.\n\nсними портрет с этой схемой. загрузи снимок и опиши:\n→ откуда шёл свет\n→ как ты его нашёл/нашла или создал(а)\n→ что это освещение говорит об образе человека",
+    d: "найди или создай освещение рембрандта — треугольник света на щеке в тени.\n\nсними портрет с этой схемой. загрузи снимок и опиши:\n→ откуда шёл свет\n→ как ты его нашёл(а) или создал(а)\n→ что это освещение говорит об образе человека",
     g: "схема рембрандта — одна из самых мощных в портретной съёмке. она работает везде.",
     photo: true
   }, {
@@ -575,7 +620,7 @@ const MODULES = [{
   sub: "схемы света, оборудование, построение образа в студии",
   theory: [{
     h: "студия — это контроль",
-    b: "натурная съёмка даёт непредсказуемость и живость. студия даёт контроль.\n\nв студии ты управляешь каждым элементом: откуда свет, какой мощности, какого цвета фон, что попадает в кадр.\n\nэто и плюс и минус. плюс — ты можешь повторить любой результат. минус — ничего не случится само. всё что будет в кадре — твоё решение.\n\nпоэтому студийная съёмка требует более чёткой концепции: ты должен/должна знать что хочешь получить до того как зайдёт модель."
+    b: "натурная съёмка даёт непредсказуемость и живость. студия даёт контроль.\n\nв студии ты управляешь каждым элементом: откуда свет, какой мощности, какого цвета фон, что попадает в кадр.\n\nэто и плюс и минус. плюс — ты можешь повторить любой результат. минус — ничего не случится само. всё что будет в кадре — твоё решение.\n\nпоэтому студийная съёмка требует более чёткой концепции: ты должен(на) знать что хочешь получить до того как зайдёт модель."
   }, {
     h: "базовые схемы студийного света",
     b: "одноточечная схема — один источник, один рефлектор или отражатель. максимально контрастно, драматично. хорошо для характерных портретов.\n\nсхема с заполняющим — основной источник плюс заполняющий свет или отражатель с другой стороны. убирает слишком глубокие тени. более коммерческий результат.\n\nрембрандт — боковой источник под углом 45° и чуть выше уровня глаз. классика портрета. треугольник света на щеке в тени.\n\nконтурный свет — источник сзади-сбоку создаёт ореол. часто добавляется к основной схеме как акцент.\n\nфоновый свет — отдельный источник на фон. убирает тени от модели, создаёт глубину или градиент."
@@ -770,7 +815,7 @@ const MODULES = [{
     b: "почерк — это когда по снимку можно угадать автора без подписи.\n\nэто не значит снимать одинаково. это значит иметь узнаваемую логику: как ты видишь, что выбираешь, как обрабатываешь.\n\nпочерк складывается из:\n→ типов образов которые ты выбираешь\n→ отношения к свету\n→ цветовой обработки\n→ как ты работаешь с людьми\n→ что тебя интересует в человеке"
   }, {
     h: "пресеты: инструмент или костыль",
-    b: "пресет — это сохранённые настройки обработки. мощный инструмент для единообразия серии и скорости работы.\n\nпроблема: когда пресет становится стилем — фотограф перестаёт думать об обработке и просто применяет фильтр.\n\nправильное использование пресета:\n→ пресет как отправная точка — потом ты всегда дорабатываешь под конкретный снимок\n→ пресет отражает твой стиль — а не чей-то чужой купленный в интернете\n→ ты понимаешь что делает каждый параметр в пресете\n\nлучший пресет — тот который ты создал(а) сам(а) после того как нашёл/нашла свою обработку."
+    b: "пресет — это сохранённые настройки обработки. мощный инструмент для единообразия серии и скорости работы.\n\nпроблема: когда пресет становится стилем — фотограф перестаёт думать об обработке и просто применяет фильтр.\n\nправильное использование пресета:\n→ пресет как отправная точка — потом ты всегда дорабатываешь под конкретный снимок\n→ пресет отражает твой стиль — а не чей-то чужой купленный в интернете\n→ ты понимаешь что делает каждый параметр в пресете\n\nлучший пресет — тот который ты создал(а) сам(а) после того как нашёл(а) свою обработку."
   }, {
     h: "как найти свой стиль",
     b: "стиль не придумывается. он обнаруживается.\n\nшаг 1: собери 20–30 своих снимков которые тебе нравятся больше всего.\nшаг 2: найди что между ними общего — в свете, цвете, кадрировании, типе образов.\nшаг 3: найди фотографов которые снимают похоже — изучи их глубже.\nшаг 4: сформулируй свой стиль в 3–5 словах. не «красивый и живой» — а конкретно: «тёплый, зернистый, интимный» или «холодный, минималистичный, дистанцированный».\nшаг 5: снимай осознанно в этом направлении — и корректируй.",
@@ -1273,56 +1318,6 @@ const MODULES = [{
 
 const TOTAL_TASKS = MODULES.reduce((a,m) => a + m.tasks.length, 0);
 
-const SCHEDULE = [{
-  week: 1,
-  films: ["Фотоувеличение (Антониони, 1966)", "В поисках Вивиан Майер (2013)"],
-  photographers: ["Питер Линдберг", "Ричард Аведон"]
-}, {
-  week: 2,
-  films: ["Окно во двор (Хичкок, 1954)", "Сальгаду: Соль земли (Вендерс, 2014)"],
-  photographers: ["Хельмут Ньютон", "Ги Бурден"]
-}, {
-  week: 3,
-  films: ["Любовное настроение (Вонг Кар-Вай, 2000)", "Портрет девушки в огне (Скьяма, 2019)"],
-  photographers: ["Нан Голдин", "Дайдо Морияма"]
-}, {
-  week: 4,
-  films: ["Дни жатвы (Малик, 1978)", "Зеркало (Тарковский, 1975)"],
-  photographers: ["Синди Шерман", "Энни Лейбовиц"]
-}, {
-  week: 5,
-  films: ["Чунгкинский экспресс (Вонг Кар-Вай, 1994)", "Амели (Жёне, 2001)"],
-  photographers: ["Тим Уокер", "Дэвид Лашапель"]
-}, {
-  week: 6,
-  films: ["Бегущий по лезвию 2049 (Вильнёв, 2017)", "Отель Гранд Будапешт (Андерсон, 2014)"],
-  photographers: ["Грегори Крюдсон", "Камилла Акранс"]
-}, {
-  week: 7,
-  films: ["Джекки (Ларраин, 2016)", "Чёрный лебедь (Аронофски, 2010)"],
-  photographers: ["Хельмут Ньютон (углублённо)", "Ги Бурден (углублённо)"]
-}, {
-  week: 8,
-  films: ["Без солнца (Крис Маркер, 1983)", "Фрида (Тэймор, 2002)"],
-  photographers: ["Вивиан Майер (архив)", "Диана Арбус"]
-}, {
-  week: 9,
-  films: ["Дьявол носит Prada (2006)", "Баския (Шнабель, 1996)"],
-  photographers: ["Питер Линдберг (углублённо)", "Ричард Аведон (углублённо)"]
-}, {
-  week: 10,
-  films: ["Новый мир (Малик, 2005)", "Суспирия (Ардженто, 1977)"],
-  photographers: ["Себастьяу Салгаду", "Нан Голдин (углублённо)"]
-}, {
-  week: 11,
-  films: ["Пианистка (Ханеке, 2001)", "Человек с киноаппаратом (Вертов, 1929)"],
-  photographers: ["Синди Шерман (углублённо)", "Грегори Крюдсон (углублённо)"]
-}, {
-  week: 12,
-  films: ["Абсолютная мода (о Диане Вриланд)", "Антон Корбейн: Внутри снаружи"],
-  photographers: ["Тим Уокер (углублённо)", "Камилла Акранс (углублённо)"]
-}];
-
 const FILM_BLOCKS = [{
   id: "vision",
   title: "Природа фотографии и взгляда",
@@ -1333,7 +1328,7 @@ const FILM_BLOCKS = [{
     director: "Микеланджело Антониони",
     year: "1966",
     why: "Фотограф снимает то, чего не видит. Реальность ускользает от объектива. Один из главных фильмов про природу фотографии.",
-    tasks: ["Герой увеличивает снимок и находит то, чего не видел глазом. Вспомни момент когда ты увидела что-то на фото, чего не замечала при съёмке. Что это было и что изменило?", "Антониони показывает: чем больше увеличиваешь — тем меньше видишь. Как это работает в твоей практике? Когда детали мешают, а не помогают?", "Финал фильма — пантомима без мяча. Что для тебя значит снимать то, чего «нет» — атмосферу, ощущение, невидимое?"]
+    tasks: ["Герой увеличивает снимок и находит то, чего не видел глазом. Вспомни момент когда ты увидел(а) что-то на фото, чего не замечал(а) при съёмке. Что это было и что изменило?", "Антониони показывает: чем больше увеличиваешь — тем меньше видишь. Как это работает в твоей практике? Когда детали мешают, а не помогают?", "Финал фильма — пантомима без мяча. Что для тебя значит снимать то, чего «нет» — атмосферу, ощущение, невидимое?"]
   }, {
     id: "rearwindow",
     title: "Окно во двор",
@@ -1380,7 +1375,7 @@ const FILM_BLOCKS = [{
     director: "Вонг Кар-Вай",
     year: "2000",
     why: "Свет через щели, замедленное время, тоска через цвет и фактуру. Один из самых красивых фильмов про то как свет создаёт ощущение.",
-    tasks: ["Вонг Кар-Вай снимает в узких коридорах и тесных пространствах — и это создаёт клаустрофобную близость. Найди тесное пространство и сними в нём портрет. Как ограничение меняет образ?", "Цвет в фильме — красный, зелёный, золотой — это не декор, это эмоция. Выбери один цвет и построй вокруг него портретную съёмку. Загрузи серию.", "Замедленное движение в ключевых сценах делает момент вечным. Какой момент в твоей практике ты хотела бы остановить? Как ты это передаёшь через фотографию?"]
+    tasks: ["Вонг Кар-Вай снимает в узких коридорах и тесных пространствах — и это создаёт клаустрофобную близость. Найди тесное пространство и сними в нём портрет. Как ограничение меняет образ?", "Цвет в фильме — красный, зелёный, золотой — это не декор, это эмоция. Выбери один цвет и построй вокруг него портретную съёмку. Загрузи серию.", "Замедленное движение в ключевых сценах делает момент вечным. Какой момент в твоей практике ты хотел(а) бы остановить? Как ты это передаёшь через фотографию?"]
   }, {
     id: "chungking",
     title: "Чунгкинский экспресс",
@@ -1441,7 +1436,7 @@ const FILM_BLOCKS = [{
     director: "Пабло Ларраин",
     year: "2016",
     why: "Как один образ становится иконой. Джекки Кеннеди сознательно строила свой визуальный образ. Про разницу между человеком и его образом.",
-    tasks: ["Джекки использует образ как защиту и оружие одновременно. Был ли у тебя клиент который приходил с очень конкретным образом себя? Как ты работала с этим?", "Ларраин снимает крупные планы лица Натали Портман — каждая морщина, каждая слеза видна. Как ты относишься к «несовершенствам» в портрете — убираешь или оставляешь?", "Платье, причёска, жест — Джекки контролировала каждую деталь образа. Разбери один свой портрет: какие детали работают на образ, какие разрушают?"]
+    tasks: ["Джекки использует образ как защиту и оружие одновременно. Был ли у тебя клиент который приходил с очень конкретным образом себя? Как ты работал(а) с этим?", "Ларраин снимает крупные планы лица Натали Портман — каждая морщина, каждая слеза видна. Как ты относишься к «несовершенствам» в портрете — убираешь или оставляешь?", "Платье, причёска, жест — Джекки контролировала каждую деталь образа. Разбери один свой портрет: какие детали работают на образ, какие разрушают?"]
   }, {
     id: "spencer",
     title: "Спенсер",
@@ -1547,7 +1542,7 @@ const FILM_BLOCKS = [{
     director: "Дэвид Фрэнкел",
     year: "2006",
     why: "Индустрия моды изнутри. Про цену профессионализма и где граница между работой и потерей себя.",
-    tasks: ["Миранда Пристли абсолютно точно знает чего хочет и не объясняет почему. Умеешь ли ты так же чётко формулировать своё видение клиенту? Приведи пример.", "Энди меняет стиль под работу — и теряет себя. Был ли момент когда ты снимала «не своё» долго и это влияло на тебя? Что вернуло тебя к себе?", "Финал: Энди выбирает себя а не карьеру. Какой выбор ты делала между «правильным карьерным шагом» и своим путём?"]
+    tasks: ["Миранда Пристли абсолютно точно знает чего хочет и не объясняет почему. Умеешь ли ты так же чётко формулировать своё видение клиенту? Приведи пример.", "Энди меняет стиль под работу — и теряет себя. Был ли момент когда ты снимал(а) «не своё» долго и это влияло на тебя? Что вернуло тебя к себе?", "Финал: Энди выбирает себя а не карьеру. Какой выбор ты делал(а) между «правильным карьерным шагом» и своим путём?"]
   }, {
     id: "fashionitalian",
     title: "Мода по-итальянски",
@@ -1568,7 +1563,28 @@ const FILM_BLOCKS = [{
     director: "документальный",
     year: "2012",
     why: "Фотограф Depeche Mode и U2 — как он построил карьеру через абсолютно свой стиль. Про отношения с артистами и долгосрочные проекты.",
-    tasks: ["Корбейн снимал одних и тех же артистов десятилетиями — и это стало его силой. Есть ли у тебя клиент или тема которую ты снимаешь долго? Что это даёт?", "Его стиль — зернистое чёрно-белое, меланхолия, дистанция — абсолютно узнаваем. Опиши свой стиль тремя словами. Это то что ты хочешь или то что сложилось?", "Корбейн отказывался от заказов которые противоречили его стилю. Был ли у тебя заказ от которого ты отказалась — или должна была отказаться? Почему?"]
+    tasks: ["Корбейн снимал одних и тех же артистов десятилетиями — и это стало его силой. Есть ли у тебя клиент или тема которую ты снимаешь долго? Что это даёт?", "Его стиль — зернистое чёрно-белое, меланхолия, дистанция — абсолютно узнаваем. Опиши свой стиль тремя словами. Это то что ты хочешь или то что сложилось?", "Корбейн отказывался от заказов которые противоречили его стилю. Был ли у тебя заказ от которого ты отказался(-ась) — или должен(на) был(а) отказаться? Почему?"]
+  }, {
+    id: "mcqueen",
+    title: "Маккуин",
+    director: "Иэн Бонот, Питер Эттедги",
+    year: "2018",
+    why: "Документальный фильм об Александре Маккуине — как травма, одержимость и ремесло становятся одеждой. Про то как личная история превращается в коллекцию и какую цену платит художник за абсолютную честность в работе.",
+    tasks: ["Маккуин превращал личные переживания — детство, отношения, потери — в показы. Была ли у тебя съёмка где личный опыт стал частью результата? Как это получилось?", "Его показы были постановками с драматургией — не просто демонстрация одежды. Сними серию как «показ»: с началом, кульминацией и финалом, даже если это один человек и одна локация.", "Маккуин говорил что мода должна тревожить, а не только украшать. Сними портрет который не «красивый», а вызывает чувство — тревогу, неловкость, узнавание. Загрузи."]
+  }, {
+    id: "margiela",
+    title: "Маржела: Гений без лица",
+    director: "Райнер Хольцемер",
+    year: "2019",
+    why: "Фильм о Мартине Маржела, который десятилетиями отказывался показывать своё лицо и давать интервью. Про анонимность как метод — когда автор исчезает, а работа говорит сама за себя.",
+    tasks: ["Маржела убрал себя из публичного образа — никаких фото, интервью, появлений на показах. Насколько важен для тебя личный бренд фотографа — и что изменится если убрать себя из него?", "Он использовал неожиданные материалы — старую одежду, носки, парики — превращая их в высокую моду. Сними съёмку используя что-то что обычно не считается «фотогеничным». Загрузи.", "Маржела говорит о работе через закадровый голос — лицо никогда не показано. Сними серию о человеке не показывая его лицо — руки, тень, силуэт, деталь. Что получится?"]
+  }, {
+    id: "diorandi",
+    title: "Dior and I",
+    director: "Фредерик Тшенг",
+    year: "2014",
+    why: "Документальный фильм о том как Раф Симонс за восемь недель готовит первую коллекцию для Dior. Про процесс — как идея превращается в готовый продукт под давлением времени и истории бренда.",
+    tasks: ["Симонс приходит в Dior с собственным минималистичным языком — и должен совместить его с архивом дома. Был ли у тебя заказ где нужно было совместить свой стиль с чужими ожиданиями? Как получилось?", "Фильм показывает рутину — швеи, примерки, правки — за кулисами одной коллекции. Сними «процесс», а не результат: подготовку к съёмке, а не саму съёмку. Загрузи серию.", "Симонс почти не говорит по-французски и работает через переводчика — постоянное напряжение между видением и коммуникацией. Как ты объясняешь своё видение людям которые думают иначе? Приведи пример."]
   }]
 }];
 
@@ -1634,7 +1650,7 @@ const PHOTOGRAPHERS = [{
   name: "Дайдо Морияма",
   years: "1938",
   why: "Зернистые чёрно-белые снимки улиц Токио. Никакой постановки. Камера как продолжение глаза. Городская фотография как поэзия.",
-  tasks: ["Морияма снимает быстро, интуитивно, не думая — потом выбирает. Выйди и сними 100 кадров за час не останавливаясь для выбора. Потом выбери 5. Что нашёл/нашла?", "Его снимки зернистые, нерезкие, «неправильные» — и это его стиль. Сними намеренно «плохо» — зерно, смаз, неправильная экспозиция. Что получится?", "Морияма снимает только улицу своего района десятилетиями. Сними одно место которое ты знаешь очень хорошо — как будто видишь впервые. Загрузи 5 кадров."]
+  tasks: ["Морияма снимает быстро, интуитивно, не думая — потом выбирает. Выйди и сними 100 кадров за час не останавливаясь для выбора. Потом выбери 5. Что нашёл(а)?", "Его снимки зернистые, нерезкие, «неправильные» — и это его стиль. Сними намеренно «плохо» — зерно, смаз, неправильная экспозиция. Что получится?", "Морияма снимает только улицу своего района десятилетиями. Сними одно место которое ты знаешь очень хорошо — как будто видишь впервые. Загрузи 5 кадров."]
 }, {
   id: "goldin",
   category: "Документалистика и улица",
@@ -1668,21 +1684,21 @@ const PHOTOGRAPHERS = [{
   category: "Современная сцена",
   name: "Петра Коллинз",
   years: "1989",
-  why: "Канадская фотографка и режиссёрка, выросшая из инстаграма в Vogue, Gucci и обложки альбомов. Мягкий фокус, пастельные тона, лёгкая зернистость — взгляд на женское тело и подростковость без внешнего оценивающего взгляда.",
+  why: "Канадский фотограф и режиссёр, выросшая из инстаграма в Vogue, Gucci и обложки альбомов. Мягкий фокус, пастельные тона, лёгкая зернистость — взгляд на женское тело и подростковость без внешнего оценивающего взгляда.",
   tasks: ["Коллинз снимает женское тело так, как его видит сама женщина — без позы «для зрителя». Сними портрет, в котором человек не позирует «привлекательно», а просто существует в своём пространстве. Загрузи.", "Её фирменный приём — мягкий фокус и лёгкое зерно, как воспоминание. Попробуй снять кадр, который выглядит как «полузабытое воспоминание» — через свет, фокус или цвет.", "Коллинз построила карьеру вокруг очень личной, узнаваемой эстетики — её снимки видно с одного взгляда. Опиши в трёх словах эстетику, которую хочешь, чтобы узнавали в твоих кадрах."]
 }, {
   id: "viviennesassen",
   category: "Современная сцена",
   name: "Вивиан Сассен",
   years: "1972",
-  why: "Нидерландская фотографка, выросшая в Кении — яркий цвет, резкие тени и тела, превращённые в графические формы. Стирает грань между модной съёмкой и фотоискусством.",
+  why: "Нидерландский фотограф, выросшая в Кении — яркий цвет, резкие тени и тела, превращённые в графические формы. Стирает грань между модной съёмкой и фотоискусством.",
   tasks: ["Сассен использует жёсткие тени как самостоятельный элемент композиции — тень иногда важнее самого объекта. Сними портрет, где тень от человека или предмета — главный герой кадра. Загрузи.", "Она часто кадрирует тело так, что оно превращается в абстрактную форму — без лица, без контекста. Сними часть тела так, чтобы зритель сначала увидел форму, а не человека.", "Сассен совмещает яркий, почти неестественный цвет с документальной честностью локации. Найди обычное место и добавь в кадр один яркий цветовой акцент — реквизит, одежду, свет. Что меняется?"]
 }, {
   id: "harleyweir",
   category: "Современная сцена",
   name: "Харли Вейр",
   years: "1989",
-  why: "Британская фотографка, снимающая кампании Gucci и Burberry — и одновременно документальные проекты в лагерях беженцев. Фактура кожи, ткани и света важнее глянца — мода становится почти тактильной.",
+  why: "Британский фотограф, снимающая кампании Gucci и Burberry — и одновременно документальные проекты в лагерях беженцев. Фактура кожи, ткани и света важнее глянца — мода становится почти тактильной.",
   tasks: ["Вейр снимает текстуру так, что хочется потрогать кадр — кожу, ткань, влагу, пыль. Сними крупный план с акцентом на фактуру — без задачи показать «красиво», только материал. Загрузи.", "Она совмещает в одной практике глянцевую моду и документалистику без границы между ними. Есть ли тема, которая кажется тебе «слишком серьёзной» для коммерческой съёмки? Почему?", "Вейр часто снимает в естественном, не идеальном свете — окно, лампа, улица. Сними портрет при первом доступном свете, который найдёшь, без подготовки. Загрузи."]
 }, {
   id: "renellmedrano",
@@ -1691,6 +1707,48 @@ const PHOTOGRAPHERS = [{
   years: "1992",
   why: "Фотографка из Бронкса, снимающая для Vogue и хип-хоп индустрии. Кастинг — соседи и знакомые, а не модели. Подлинность района и людей становится главным языком стиля.",
   tasks: ["Медрано снимает людей из своего района — она их знает, и это видно в кадре. Сними портретную серию людей из своего окружения — соседей, друзей, знакомых. Загрузи 3 кадра.", "Её свет и локации — улица, подъезд, двор — не маскируются под студию, а становятся частью истории. Найди локацию рядом с домом и сними там полноценный портрет, используя то, что есть.", "Медрано говорит, что для неё важно показывать «своих» людей с достоинством, без экзотизации. Как ты выбираешь, кого и как снимать, когда работаешь со «своим» сообществом или культурой?"]
+}, {
+  id: "jansson",
+  category: "Мода и стиль",
+  name: "Микаэль Янссон",
+  years: "1962",
+  why: "Шведский фотограф, сделавший минимализм языком большой моды — кампании Calvin Klein, обложки Vogue. Свет ровный, композиция строгая, ничего лишнего. Урок того, как сдержанность может быть мощнее эффектности.",
+  tasks: ["Янссон убирает всё лишнее — фон, реквизит, лишнюю эмоцию — оставляя только свет, тело и одежду. Сними портрет максимально просто: один фон, один источник света, ничего больше. Загрузи.", "Его кампании выглядят холодно и точно, но не безжизненно. Как ты находишь баланс между «строго» и «живо»? Приведи пример из своей практики.", "Янссон часто снимает в нейтральном студийном пространстве — но каждая деталь одежды и позы выверена. Сними серию, где всё внимание на одной детали — ткани, силуэте, жесте."]
+}, {
+  id: "teller",
+  category: "Мода и стиль",
+  name: "Юрген Теллер",
+  years: "1964",
+  why: "Немецкий фотограф, который снимает моду как случайный снимок — прямая вспышка, неидеальные тела, обычные интерьеры. Разрушил глянцевую идеальность и сделал «некрасивое» новым языком моды.",
+  tasks: ["Теллер снимает на вспышку в упор — жёстко, плоско, без украшательства. Сними портрет с прямой вспышкой в простом интерьере. Что это делает с образом?", "Он часто снимает себя и близких — без дистанции между фотографом и моделью. Сними кого-то близкого так, как обычно снимаешь клиентов. Что меняется?", "Теллер выбирает несовершенные тела, странные позы, обычные места — и это становится модой. Найди «неидеальную» деталь — морщину, шрам, неловкую позу — и сделай её центром кадра. Загрузи."]
+}, {
+  id: "meisel",
+  category: "Мода и стиль",
+  name: "Стивен Майзел",
+  years: "1954",
+  why: "Один из самых влиятельных фотографов моды — снимал почти все обложки Vogue Italia, создал книгу «Sex» с Мадонной. Мастер полного перевоплощения: каждая съёмка — как новый фильм с новыми героями.",
+  tasks: ["Майзел может снять одну модель в десяти совершенно разных образах за один день. Сними одного человека в трёх разных «персонажах» — смени свет, позу, настроение. Загрузи серию.", "Его съёмки часто отсылают к кино, истории искусства, другим фотографам — но звучат по-новому. Найди референс (фильм, картину, фото) и пересними его своими средствами.", "Майзел работает с командой как режиссёр — стилист, визажист, свет выстроены под одну идею. Сформулируй идею для своей следующей съёмки в одном предложении до того как возьмёшь камеру."]
+}, {
+  id: "penn",
+  category: "Портрет и образ",
+  name: "Ирвинг Пенн",
+  years: "1917–2009",
+  why: "Фотограф, который снимал портреты и натюрморты с одинаковой строгостью — простой фон, естественный свет, безупречная композиция. Один из главных мастеров студийного портрета XX века.",
+  tasks: ["Пенн часто снимал людей в углу из двух сходящихся стен — это создавало напряжение и близость. Найди угол или тесное пространство и сними в нём портрет. Загрузи.", "Его натюрморты — окурки, отходы, простые предметы — сняты с той же тщательностью, что и портреты звёзд. Сними натюрморт из обычных, «некрасивых» предметов с максимальным вниманием к свету и форме.", "Пенн работал с минимальным набором света — часто одно окно. Сними портрет, используя только один источник света, естественный или искусственный. Разбери, что получилось."]
+}, {
+  id: "roversi",
+  category: "Мода и стиль",
+  name: "Паоло Роверси",
+  years: "1947",
+  why: "Итальянский фотограф, который снимает моду как живопись — мягкий свет, фон из старой ткани, полароидная зернистость. Образы получаются скорее живописными, чем фотографическими — про атмосферу больше, чем про одежду.",
+  tasks: ["Роверси использует один и тот же фон — мягкую ткань — десятилетиями, меняя только свет и человека. Найди один фон и сними в нём серию из нескольких разных людей или настроений.", "Его свет почти всегда мягкий, рассеянный, будто из окна в пасмурный день. Сними портрет в максимально мягком, нерезком свете — и опиши ощущение, которое получилось.", "Роверси часто оставляет зерно, размытость, несовершенство — это часть его языка. Найди в своём архиве «технически неидеальный» кадр, который всё равно работает. Почему он работает?"]
+}, {
+  id: "ritts",
+  category: "Портрет и образ",
+  name: "Херб Риттс",
+  years: "1952–2002",
+  why: "Американский фотограф, который снимал тело как скульптуру — резкий контровой свет, чёрно-белая печать, силуэты на фоне пустыни или студии. Каждый кадр выглядит как мрамор — монументально и чувственно одновременно.",
+  tasks: ["Риттс часто снимал тело контровым светом так, что оно превращалось в силуэт или скульптуру. Сними портрет с контровым светом — пусть форма победит детали. Загрузи.", "Его лучшие кадры сняты на природе — пустыня, пляж, простой пейзаж — без декораций. Сними портрет на открытом пространстве, используя только то, что есть вокруг.", "Риттс печатал чёрно-белое с глубоким контрастом. Переведи один свой цветной портрет в чёрно-белый с сильным контрастом — что меняется в восприятии?"]
 }];
 </script>
 <script>
@@ -1740,13 +1798,49 @@ function renderWelcome() {
     {num:'05', title:'клиент и бизнес', desc:'бриф, коммуникация, ценообразование, правки, границы'},
     {num:'06', title:'личный бренд', desc:'позиционирование, ниша, портфолио, продвижение'}
   ];
+
+  const plural = (n, one, few, many) => {
+    const n10 = n % 10, n100 = n % 100;
+    if (n100 > 10 && n100 < 20) return many;
+    if (n10 === 1) return one;
+    if (n10 > 1 && n10 < 5) return few;
+    return many;
+  };
+
+  let nextIdx = MODULES.findIndex((_, i) => !S.done.has(i));
+  if (nextIdx === -1) nextIdx = MODULES.length - 1;
+  const nextM = MODULES[nextIdx];
+  const lessonsCnt = nextM.theory.length;
+  const tasksCnt = nextM.tasks.length;
+
+  const cardIdxs = (nextIdx === 0 ? [0, 1] : [nextIdx - 1, nextIdx]).filter(i => i >= 0 && i < MODULES.length);
+
+  const cardsHtml = cardIdxs.map(i => {
+    const m = MODULES[i];
+    const done = S.done.has(i);
+    const tc = m.tasks.filter((_,ti) => S.checks[tkey(i,ti)]).length;
+    const pct = done ? 100 : Math.round(tc / m.tasks.length * 100);
+    return `<div class="welcome-pcard" onclick="goTo(${i})">
+      <div class="welcome-pcard-top">
+        <span class="welcome-pcard-badge ${done?'done':'progress'}">модуль ${i+1}</span>
+        <span class="welcome-pcard-status">${done?'пройдено':`${tc} из ${m.tasks.length} ${plural(m.tasks.length,'задания','заданий','заданий')}`}</span>
+      </div>
+      <div class="welcome-pcard-title">${esc(m.title)}</div>
+      <div class="welcome-pcard-bar"><div class="welcome-pcard-fill ${done?'pink':'green'}" style="width:${pct}%"></div></div>
+    </div>`;
+  }).join('');
+
   const html = `<div class="welcome-page">
-    <div class="welcome-hero">
-      <div class="welcome-brand">SHARDEN WAY</div>
-      <h1 class="welcome-title">курс фотографии</h1>
-      <p class="welcome-sub">20 модулей — от взгляда до профессии. теория, практика и живая связь со мной на каждом шаге.</p>
-      <button class="welcome-start-btn" onclick="goTo(0)">начать обучение →</button>
+    <div class="welcome-hero2">
+      <div class="welcome-hero2-text">
+        <div class="welcome-greeting">привет, готов(а)?</div>
+        <h1 class="welcome-hero2-title">новый модуль — ${esc(nextM.title)}</h1>
+        <p class="welcome-hero2-sub">${lessonsCnt} ${plural(lessonsCnt,'урок','урока','уроков')} · ${tasksCnt} ${plural(tasksCnt,'задание','задания','заданий')}</p>
+        <button class="welcome-hero2-btn" onclick="goTo(${nextIdx})">начать →</button>
+      </div>
+      <div class="welcome-hero2-art"><img src="hero-photo.jpg" alt=""></div>
     </div>
+    <div class="welcome-pgrid">${cardsHtml}</div>
     <div class="welcome-grid">
       ${blocks.map(b=>`<div class="welcome-block">
         <div class="welcome-block-num">${b.num}</div>
@@ -1754,6 +1848,7 @@ function renderWelcome() {
         <div class="welcome-block-desc">${b.desc}</div>
       </div>`).join('')}
     </div>
+    <div class="welcome-stripes"></div>
     <div class="welcome-footer">
       <div class="welcome-footer-text">курс веду я сама — отвечаю на задания, даю фидбек и поддерживаю на каждом этапе.<br>всё общение через телеграм.</div>
       <div class="welcome-footer-name">Nigina Sharden</div>
@@ -1767,9 +1862,9 @@ function renderCourseComplete() {
   const html = `<div class="welcome-page">
     <div class="welcome-hero">
       <div class="done-badge" style="margin-bottom:18px">✓ все 20 модулей пройдены</div>
-      <div class="welcome-brand">SHARDEN WAY</div>
+      <div class="welcome-brand"><div class="logo-stack"><span class="logo-main">SHARDEN</span><span class="logo-sub">— WAY —</span></div></div>
       <h1 class="welcome-title">поздравляю — курс завершён</h1>
-      <p class="welcome-sub">ты прошёл/прошла весь путь: от взгляда — до профессии. 20 модулей, десятки заданий, разборы фильмов и фотографов, эксперименты со светом, цветом и стилем. это много честной работы, и она уже видна в том, как ты снимаешь и смотришь на кадр.</p>
+      <p class="welcome-sub">ты прошёл(а) весь путь: от взгляда — до профессии. 20 модулей, десятки заданий, разборы фильмов и фотографов, эксперименты со светом, цветом и стилем. это много честной работы, и она уже видна в том, как ты снимаешь и смотришь на кадр.</p>
     </div>
     <div class="welcome-block" style="margin-bottom:28px">
       <div class="welcome-block-title" style="margin-bottom:10px">несколько слов на прощание</div>
@@ -1785,7 +1880,7 @@ function renderCourseComplete() {
     </div>
     <div style="text-align:center;margin-top:32px;display:flex;gap:14px;justify-content:center;flex-wrap:wrap">
       <button class="welcome-start-btn" onclick="switchSection('contact')">написать мне →</button>
-      <button class="welcome-start-btn" style="background:none;border:1px solid #c8a96e;color:#c8a96e" onclick="goTo(0)">вернуться к модулям</button>
+      <button class="welcome-start-btn" style="background:none;border:1px solid #1e3a2c;color:#1e3a2c" onclick="goTo(0)">вернуться к модулям</button>
     </div>
   </div>`;
   document.getElementById('content').innerHTML = html;
@@ -1806,8 +1901,8 @@ function renderSidebar() {
   document.getElementById('topnav-fill').style.width = taskPct + '%';
   document.getElementById('nav-pct').textContent = taskPct + '% · ' + doneTasks + '/' + TOTAL_TASKS;
 
-  let html = `<button class="sb-mod${S.cur===-1?' cur':''}" onclick="goTo(-1)" style="border-bottom:1px solid #1e1812;margin-bottom:4px">
-    <span class="sb-mod-num" style="color:#c8a96e;font-size:9px">·</span>
+  let html = `<button class="sb-mod${S.cur===-1?' cur':''}" onclick="goTo(-1)" style="border-bottom:1px solid #e3dbc9;margin-bottom:4px">
+    <span class="sb-mod-num" style="color:#cf93a8;font-size:9px">·</span>
     <span class="sb-mod-info">
       <span class="sb-mod-name" style="font-size:11px;letter-spacing:.5px">введение в курс</span>
     </span>
@@ -1829,8 +1924,8 @@ function renderSidebar() {
       ${done ? '<span class="sb-done-mark">✓</span>' : ''}
     </button>`;
   });
-  html += `<button class="sb-mod${S.cur===MODULES.length?' cur':''}" onclick="goTo(${MODULES.length})" style="border-top:1px solid #1e1812;margin-top:4px">
-    <span class="sb-mod-num" style="color:#c8a96e;font-size:9px">·</span>
+  html += `<button class="sb-mod${S.cur===MODULES.length?' cur':''}" onclick="goTo(${MODULES.length})" style="border-top:1px solid #e3dbc9;margin-top:4px">
+    <span class="sb-mod-num" style="color:#cf93a8;font-size:9px">·</span>
     <span class="sb-mod-info">
       <span class="sb-mod-name" style="font-size:11px;letter-spacing:.5px">финал курса</span>
     </span>
@@ -1850,8 +1945,6 @@ function renderContent() {
   const allDone = tc === m.tasks.length;
   document.getElementById('mob-title').textContent = m.title;
 
-  const hasSchedule = S.cur === MODULES.length - 1;
-
   let html = `<div class="mod-hdr">
     <div class="mod-nav-line"><span class="mod-nav-num">модуль ${S.cur+1} из ${MODULES.length}</span></div>
     <h1 class="mod-h1">${esc(m.title)}</h1>
@@ -1863,7 +1956,7 @@ function renderContent() {
   html += `<div class="tabs-bar">
     <button class="tbtab${S.tab==='theory'?' active':''}" onclick="setTab('theory')">теория</button>
     <button class="tbtab${S.tab==='tasks'?' active':''}" onclick="setTab('tasks')">задания (${tc}/${m.tasks.length})</button>
-    ${hasSchedule ? `<button class="tbtab${S.tab==='schedule'?' active':''}" onclick="setTab('schedule')">расписание</button>` : ''}
+    <button class="tbtab${S.tab==='schedule'?' active':''}" onclick="setTab('schedule')">расписание</button>
   </div>`;
 
   if (S.tab === 'theory') {
@@ -1934,7 +2027,7 @@ function renderContent() {
           ${S.copied===k ? '<span class="copy-ok">скопировано</span>' : ''}
         </div>` : ''}
         <div style="margin-top:10px">
-          <label style="display:inline-flex;align-items:center;gap:7px;font-size:11px;color:#3a3028;background:#070504;border:1px solid #1e1812;border-radius:5px;padding:7px 13px;cursor:pointer">
+          <label style="display:inline-flex;align-items:center;gap:7px;font-size:11px;color:#b0a596;background:#ffffff;border:1px solid #e3dbc9;border-radius:5px;padding:7px 13px;cursor:pointer">
             прикрепить фото
             <input type="file" accept="image/*" style="display:none" onchange="uploadPhoto(this,${ti})">
           </label>
@@ -1947,35 +2040,53 @@ function renderContent() {
 
     // Student name + submit button
     const submitted = S.submitted && S.submitted[S.cur];
-    const inputStyle = 'width:100%;background:#070504;border:1px solid #1e1812;border-radius:5px;color:#ddd6c8;font-family:\'DM Sans\',sans-serif;font-size:13px;padding:9px 12px;outline:none';
-    html += `<div style="margin-top:20px;background:#0e0b08;border:1px solid #1e1812;border-radius:6px;padding:20px">
-      <div style="font-size:9px;letter-spacing:2px;color:#2a2218;text-transform:uppercase;margin-bottom:14px">отправить мне</div>
+    const inputStyle = 'width:100%;background:#ffffff;border:1px solid #e3dbc9;border-radius:5px;color:#2a2a2a;font-family:\'Manrope\',sans-serif;font-size:13px;padding:9px 12px;outline:none';
+    html += `<div style="margin-top:20px;background:#ffffff;border:1px solid #e3dbc9;border-radius:6px;padding:20px">
+      <div style="font-size:9px;letter-spacing:2px;color:#b0a596;text-transform:uppercase;margin-bottom:14px">отправить мне</div>
       <div style="display:flex;gap:10px;margin-bottom:10px">
         <input type="text" placeholder="имя" value="${esc(S.studentName||'')}"
           oninput="saveName(this.value)" style="${inputStyle}">
         <input type="text" placeholder="@telegram" value="${esc(S.studentTg||'')}"
           oninput="saveTg(this.value)" style="${inputStyle}">
       </div>
-      <button onclick="sendToMentor()" style="width:100%;padding:11px;border:none;border-radius:6px;font-size:12px;letter-spacing:.8px;background:${submitted?'#0a120a':'linear-gradient(135deg,#a8894e,#c8a96e)'};color:${submitted?'#5a8a5a':'#060401'};font-family:'DM Sans',sans-serif;text-transform:lowercase">
+      <button onclick="sendToMentor()" style="width:100%;padding:11px;border:none;border-radius:6px;font-size:12px;letter-spacing:.8px;background:${submitted?'#eaf3ec':'linear-gradient(135deg,#cf93a8,#1e3a2c)'};color:${submitted?'#3a6b4a':'#ffffff'};font-family:'Manrope',sans-serif;text-transform:lowercase">
         ${submitted ? 'отправлено ✓' : 'отправить мне →'}
       </button>
-      ${submitted ? '<div style="font-size:11px;color:#4a6a4a;margin-top:10px;text-align:center">нигина получила твои ответы и скоро напишет фидбек</div>' : ''}
+      ${submitted ? '<div style="font-size:11px;color:#3a6b4a;margin-top:10px;text-align:center">нигина получила твои ответы и скоро напишет фидбек</div>' : ''}
     </div>`;
   } else if (S.tab === 'schedule') {
-    html += `<p class="sched-intro">по 2 фильма и 2 фотографа в неделю — параллельно с модулями курса.</p>`;
-    SCHEDULE.forEach(w => {
-      html += `<div class="sched-week">
-        <div class="sched-wnum">неделя ${w.week}</div>
-        <div class="sched-cols">
-          <div style="flex:1"><div class="sched-col-h">фильмы</div>
-            ${w.films.map(f=>`<div class="sched-item"><span class="sched-arrow">→</span>${esc(f)}</div>`).join('')}
-          </div>
-          <div style="flex:1"><div class="sched-col-h">фотографы</div>
-            ${w.photographers.map(p=>`<div class="sched-item"><span class="sched-arrow">→</span>${esc(p)}</div>`).join('')}
-          </div>
-        </div>
+    const totalFilms = FILM_BLOCKS.reduce((a,b)=>a+b.films.length,0);
+    const doneFilms = FILM_BLOCKS.reduce((a,b)=>a+b.films.filter(isFilmDone).length,0);
+    const donePh = PHOTOGRAPHERS.filter(isPhDone).length;
+    const total = totalFilms + PHOTOGRAPHERS.length;
+    const done = doneFilms + donePh;
+
+    html += `<p class="sched-intro">база насмотренности курса — фильмы и фотографы для изучения. пункт отмечается сам, как только ты ответишь на все вопросы по нему в разделе «база насмотренности».</p>
+    <div class="sched-progress">${done} из ${total} изучено</div>`;
+
+    FILM_BLOCKS.forEach(block => {
+      html += `<div class="sched-block">
+        <div class="sched-block-h">${esc(block.title)}</div>
+        ${block.films.map(f => {
+          const fdone = isFilmDone(f);
+          return `<div class="sched-item${fdone?' done':''}" onclick="goToWatchlistItem('film','${f.id}')">
+            <span class="sched-check">${fdone?'✓':'○'}</span>
+            <span>${esc(f.title)} <span class="sched-item-meta">— ${esc(f.director)}, ${esc(f.year)}</span></span>
+          </div>`;
+        }).join('')}
       </div>`;
     });
+
+    html += `<div class="sched-block">
+      <div class="sched-block-h">фотографы</div>
+      ${PHOTOGRAPHERS.map(ph => {
+        const pdone = isPhDone(ph);
+        return `<div class="sched-item${pdone?' done':''}" onclick="goToWatchlistItem('ph','${ph.id}')">
+          <span class="sched-check">${pdone?'✓':'○'}</span>
+          <span>${esc(ph.name)} <span class="sched-item-meta">— ${esc(ph.category)}</span></span>
+        </div>`;
+      }).join('')}
+    </div>`;
   }
 
   document.getElementById('content').innerHTML = html;
@@ -2158,6 +2269,22 @@ function toggleFilm(id) {
 }
 function togglePh(id) {
   S.openPh = S.openPh===id ? null : id; renderWatchlist();
+}
+
+// ── Watchlist progress (used by per-module "расписание") ────────────
+function isFilmDone(film) {
+  return film.tasks.every((_,i) => (S.answers[`wl-film-${film.id}-${i}`]||'').trim());
+}
+function isPhDone(ph) {
+  return ph.tasks.every((_,i) => (S.answers[`wl-ph-${ph.id}-${i}`]||'').trim());
+}
+function goToWatchlistItem(type, id) {
+  switchSection('watchlist');
+  S.wlTab = type === 'film' ? 'films' : 'photographers';
+  if (type === 'film') { S.openFilm = id; S.openPh = null; }
+  else { S.openPh = id; S.openFilm = null; }
+  renderWatchlist();
+  document.getElementById('content-area').scrollTop = 0;
 }
 
 function openSb() {
