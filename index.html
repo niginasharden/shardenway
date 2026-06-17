@@ -330,7 +330,7 @@ textarea:focus{border-color:#1e3a2c!important}
 
 <!-- Top nav -->
 <div id="topnav">
-  <div class="nav-brand"><div class="logo-stack"><span class="logo-main">SHARDEN</span><span class="logo-sub">— WAY —</span></div></div>
+  <button class="nav-brand" style="background:none;border:none;cursor:pointer" onclick="goTo(-1);switchSection('course')"><div class="logo-stack"><span class="logo-main">SHARDEN</span><span class="logo-sub">— WAY —</span></div></button>
   <button class="nav-tab active" id="nav-course" onclick="switchSection('course')">курс</button>
   <button class="nav-tab" id="nav-watchlist" onclick="switchSection('watchlist')">база насмотренности</button>
   <button class="nav-tab" id="nav-contact" onclick="switchSection('contact')">связаться</button>
@@ -426,7 +426,7 @@ const MODULES = [{
   emoji: "👁",
   title: "как смотрит фотограф",
   level: "base",
-  section: "уровень 1 — видеть",
+  section: "модуль 1 — видеть",
   sub: "насмотренность, визуальное мышление, источники вдохновения",
   theory: [{
     h: "разница между смотреть и видеть",
@@ -943,7 +943,7 @@ const MODULES = [{
   emoji: "🤝",
   title: "клиент: от заявки до результата",
   level: "mid",
-  section: "уровень 3 — работать с людьми",
+  section: "модуль 2 — работать с людьми",
   sub: "бриф, коммуникация, управление ожиданиями, сдача работы",
   theory: [{
     h: "большинство проблем с клиентами — это проблемы коммуникации",
@@ -1175,7 +1175,7 @@ const MODULES = [{
   emoji: "💰",
   title: "ценообразование",
   level: "pro",
-  section: "уровень 4 — строить бизнес",
+  section: "модуль 3 — строить бизнес",
   sub: "как считать стоимость, почему дёшево убивает карьеру, как повышать чек",
   theory: [{
     h: "почему фотографы берут мало",
@@ -1820,11 +1820,13 @@ function renderWelcome() {
     const done = S.done.has(i);
     const tc = m.tasks.filter((_,ti) => S.checks[tkey(i,ti)]).length;
     const pct = done ? 100 : Math.round(tc / m.tasks.length * 100);
+    const cardLabel = i === nextIdx ? 'следующий уровень' : 'текущий уровень';
     return `<div class="welcome-pcard" onclick="goTo(${i})">
       <div class="welcome-pcard-top">
-        <span class="welcome-pcard-badge ${done?'done':'progress'}">модуль ${i+1}</span>
+        <span class="welcome-pcard-badge ${done?'done':'progress'}">уровень ${i+1}</span>
         <span class="welcome-pcard-status">${done?'пройдено':`${tc} из ${m.tasks.length} ${plural(m.tasks.length,'задания','заданий','заданий')}`}</span>
       </div>
+      <div style="font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:#b0a596;margin-bottom:4px">${cardLabel}</div>
       <div class="welcome-pcard-title">${esc(m.title)}</div>
       <div class="welcome-pcard-bar"><div class="welcome-pcard-fill ${done?'pink':'green'}" style="width:${pct}%"></div></div>
     </div>`;
@@ -1834,7 +1836,7 @@ function renderWelcome() {
     <div class="welcome-hero2">
       <div class="welcome-hero2-text">
         <div class="welcome-greeting">привет, готов(а)?</div>
-        <h1 class="welcome-hero2-title">новый модуль — ${esc(nextM.title)}</h1>
+        <h1 class="welcome-hero2-title">новый уровень — ${esc(nextM.title)}</h1>
         <p class="welcome-hero2-sub">${lessonsCnt} ${plural(lessonsCnt,'урок','урока','уроков')} · ${tasksCnt} ${plural(tasksCnt,'задание','задания','заданий')}</p>
         <button class="welcome-hero2-btn" onclick="goTo(${nextIdx})">начать →</button>
       </div>
@@ -1861,10 +1863,10 @@ function renderCourseComplete() {
   document.getElementById('mob-title').textContent = 'курс завершён';
   const html = `<div class="welcome-page">
     <div class="welcome-hero">
-      <div class="done-badge" style="margin-bottom:18px">✓ все 20 модулей пройдены</div>
+      <div class="done-badge" style="margin-bottom:18px">✓ все 20 уровней пройдены 🎉</div>
       <div class="welcome-brand"><div class="logo-stack"><span class="logo-main">SHARDEN</span><span class="logo-sub">— WAY —</span></div></div>
       <h1 class="welcome-title">поздравляю — курс завершён</h1>
-      <p class="welcome-sub">ты прошёл(а) весь путь: от взгляда — до профессии. 20 модулей, десятки заданий, разборы фильмов и фотографов, эксперименты со светом, цветом и стилем. это много честной работы, и она уже видна в том, как ты снимаешь и смотришь на кадр.</p>
+      <p class="welcome-sub">ты прошёл(а) весь путь: от взгляда — до профессии. 20 уровней, десятки заданий, разборы фильмов и фотографов, эксперименты со светом, цветом и стилем. это много честной работы, и она уже видна в том, как ты снимаешь и смотришь на кадр.</p>
     </div>
     <div class="welcome-block" style="margin-bottom:28px">
       <div class="welcome-block-title" style="margin-bottom:10px">несколько слов на прощание</div>
@@ -1946,12 +1948,12 @@ function renderContent() {
   document.getElementById('mob-title').textContent = m.title;
 
   let html = `<div class="mod-hdr">
-    <div class="mod-nav-line"><span class="mod-nav-num">модуль ${S.cur+1} из ${MODULES.length}</span></div>
+    <div class="mod-nav-line"><span class="mod-nav-num">уровень ${S.cur+1} из ${MODULES.length}</span></div>
     <h1 class="mod-h1">${esc(m.title)}</h1>
     <p class="mod-sub">${esc(m.sub)}</p>
   </div>`;
 
-  if (isDone) html += `<div class="done-badge">✓ модуль завершён</div>`;
+  if (isDone) html += `<div class="done-badge">✓ уровень завершён</div>`;
 
   html += `<div class="tabs-bar">
     <button class="tbtab${S.tab==='theory'?' active':''}" onclick="setTab('theory')">теория</button>
@@ -2035,7 +2037,7 @@ function renderContent() {
       </div>`;
     });
     html += `<button class="cmp-btn ${allDone?'ready':'locked'}" onclick="complete()">
-      ${allDone ? 'завершить модуль →' : `выполни все задания (${tc}/${m.tasks.length})`}
+      ${allDone ? 'завершить уровень →' : `выполни все задания (${tc}/${m.tasks.length})`}
     </button>`;
 
     // Student name + submit button
@@ -2126,6 +2128,7 @@ function renderWatchlist() {
               </div>
             </div>`;
             }).join('')}
+            <button onclick="event.stopPropagation();sendWlItem('film','${film.id}')" id="wl-send-film-${film.id}" style="margin-top:14px;width:100%;padding:10px;border:none;border-radius:6px;font-size:11px;letter-spacing:.8px;background:linear-gradient(135deg,#cf93a8,#1e3a2c);color:#ffffff;font-family:'Manrope',sans-serif;text-transform:lowercase;cursor:pointer">отправить нигине →</button>
           </div>
         </div>`;
       });
@@ -2153,6 +2156,7 @@ function renderWatchlist() {
             </div>
           </div>`;
           }).join('')}
+          <button onclick="event.stopPropagation();sendWlItem('ph','${ph.id}')" id="wl-send-ph-${ph.id}" style="margin-top:14px;width:100%;padding:10px;border:none;border-radius:6px;font-size:11px;letter-spacing:.8px;background:linear-gradient(135deg,#cf93a8,#1e3a2c);color:#ffffff;font-family:'Manrope',sans-serif;text-transform:lowercase;cursor:pointer">отправить нигине →</button>
         </div>
       </div>`;
     });
@@ -2269,6 +2273,43 @@ function toggleFilm(id) {
 }
 function togglePh(id) {
   S.openPh = S.openPh===id ? null : id; renderWatchlist();
+}
+
+// ── Watchlist send to Telegram ────────────────────────────────────
+async function sendWlItem(type, id) {
+  const btn = document.getElementById(`wl-send-${type}-${id}`);
+  if (btn) { btn.textContent = 'отправляю...'; btn.disabled = true; }
+  const name = S.studentName || 'студент';
+  const tg = S.studentTg ? ` | ${S.studentTg}` : '';
+  let itemName = '';
+  let answersText = '';
+  if (type === 'film') {
+    const film = FILM_BLOCKS.flatMap(b=>b.films).find(f=>f.id===id);
+    if (!film) return;
+    itemName = `🎬 ${film.title} (${film.director}, ${film.year})`;
+    film.tasks.forEach((t,i) => {
+      const ans = (S.answers[`wl-film-${id}-${i}`]||'').trim() || '(нет ответа)';
+      answersText += `\n❓ ${t}\n✏️ ${ans}\n`;
+    });
+  } else {
+    const ph = PHOTOGRAPHERS.find(p=>p.id===id);
+    if (!ph) return;
+    itemName = `📷 ${ph.name} — ${ph.category}`;
+    ph.tasks.forEach((t,i) => {
+      const ans = (S.answers[`wl-ph-${id}-${i}`]||'').trim() || '(нет ответа)';
+      answersText += `\n❓ ${t}\n✏️ ${ans}\n`;
+    });
+  }
+  const text = `<b>база насмотренности</b>\n${itemName}\n<b>${name}</b>${tg}\n${'─'.repeat(30)}${answersText}`;
+  try {
+    await fetch(`https://api.telegram.org/bot${TG_TOKEN}/sendMessage`, {
+      method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({chat_id: TG_CHAT, text, parse_mode:'HTML'})
+    });
+    if (btn) { btn.textContent = 'отправлено ✓'; btn.style.background = '#3a6b4a'; }
+  } catch(e) {
+    if (btn) { btn.textContent = 'ошибка, попробуй ещё раз'; btn.disabled = false; }
+  }
 }
 
 // ── Watchlist progress (used by per-module "расписание") ────────────
@@ -2391,7 +2432,7 @@ async function sendToMentor() {
   answers.forEach((a, i) => {
     answersText += `\n✏️ <b>Задание ${i+1}: ${a.title}</b>\n${a.answer||'(нет ответа)'}\n`;
   });
-  const text = `<b>модуль ${S.cur+1}: ${m.title}</b>\n<b>${name}</b>${tg?' | '+tg:''}\n${'─'.repeat(30)}${answersText}`;
+  const text = `<b>уровень ${S.cur+1}: ${m.title}</b>\n<b>${name}</b>${tg?' | '+tg:''}\n${'─'.repeat(30)}${answersText}`;
   try {
     const res = await fetch(`https://api.telegram.org/bot${TG_TOKEN}/sendMessage`, {
       method:'POST', headers:{'Content-Type':'application/json'},
@@ -2440,7 +2481,7 @@ async function uploadPhoto(input, ti) {
   const fd   = new FormData();
   fd.append('chat_id', TG_CHAT);
   fd.append('photo', file);
-  fd.append('caption', `модуль ${S.cur+1}: ${m.title}\nзадание ${ti+1}: ${task.t}\n${name}${tg?' ('+tg+')':''}`);
+  fd.append('caption', `уровень ${S.cur+1}: ${m.title}\nзадание ${ti+1}: ${task.t}\n${name}${tg?' ('+tg+')':''}`);
   try {
     const res = await fetch(`https://api.telegram.org/bot${TG_TOKEN}/sendPhoto`, { method:'POST', body:fd });
     const d = await res.json();
