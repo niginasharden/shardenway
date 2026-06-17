@@ -1820,7 +1820,7 @@ function renderWelcome() {
     const done = S.done.has(i);
     const tc = m.tasks.filter((_,ti) => S.checks[tkey(i,ti)]).length;
     const pct = done ? 100 : Math.round(tc / m.tasks.length * 100);
-    const cardLabel = i === nextIdx ? 'следующий уровень' : 'текущий уровень';
+    const cardLabel = S.done.has(i) ? 'пройдено ✓' : i === nextIdx ? 'текущий уровень' : 'следующий уровень';
     return `<div class="welcome-pcard" onclick="goTo(${i})">
       <div class="welcome-pcard-top">
         <span class="welcome-pcard-badge ${done?'done':'progress'}">уровень ${i+1}</span>
@@ -2128,7 +2128,7 @@ function renderWatchlist() {
               </div>
             </div>`;
             }).join('')}
-            <button onclick="event.stopPropagation();sendWlItem('film','${film.id}')" id="wl-send-film-${film.id}" style="margin-top:14px;width:100%;padding:10px;border:none;border-radius:6px;font-size:11px;letter-spacing:.8px;background:linear-gradient(135deg,#cf93a8,#1e3a2c);color:#ffffff;font-family:'Manrope',sans-serif;text-transform:lowercase;cursor:pointer">отправить нигине →</button>
+            <button onclick="event.stopPropagation();sendWlItem('film','${film.id}')" id="wl-send-film-${film.id}" style="margin-top:14px;width:100%;padding:10px;border:none;border-radius:6px;font-size:11px;letter-spacing:.8px;background:linear-gradient(135deg,#cf93a8,#1e3a2c);color:#ffffff;font-family:'Manrope',sans-serif;text-transform:lowercase;cursor:pointer">отправить на проверку →</button>
           </div>
         </div>`;
       });
@@ -2156,7 +2156,7 @@ function renderWatchlist() {
             </div>
           </div>`;
           }).join('')}
-          <button onclick="event.stopPropagation();sendWlItem('ph','${ph.id}')" id="wl-send-ph-${ph.id}" style="margin-top:14px;width:100%;padding:10px;border:none;border-radius:6px;font-size:11px;letter-spacing:.8px;background:linear-gradient(135deg,#cf93a8,#1e3a2c);color:#ffffff;font-family:'Manrope',sans-serif;text-transform:lowercase;cursor:pointer">отправить нигине →</button>
+          <button onclick="event.stopPropagation();sendWlItem('ph','${ph.id}')" id="wl-send-ph-${ph.id}" style="margin-top:14px;width:100%;padding:10px;border:none;border-radius:6px;font-size:11px;letter-spacing:.8px;background:linear-gradient(135deg,#cf93a8,#1e3a2c);color:#ffffff;font-family:'Manrope',sans-serif;text-transform:lowercase;cursor:pointer">отправить на проверку →</button>
         </div>
       </div>`;
     });
