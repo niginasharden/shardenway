@@ -347,7 +347,7 @@ textarea:focus{border-color:#1e3a2c!important}
   <button class="nav-tab active" id="nav-course" onclick="switchSection('course')">курс</button>
   <button class="nav-tab" id="nav-watchlist" onclick="switchSection('watchlist')">база насмотренности</button>
   <button class="nav-tab" id="nav-contact" onclick="switchSection('contact')">связаться</button>
-  <button class="nav-tab" id="nav-habits" onclick="toggleHabitsPanel()" title="трекер привычек" style="font-size:11px;letter-spacing:.5px"><span id="nav-streak">🔥 0</span></button>
+  <button class="nav-tab" id="nav-habits" onclick="toggleHabitsPanel()" title="трекер привычек" style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;padding:0 14px;height:100%;border:none;background:none;cursor:pointer"><div id="nav-habit-dots" style="display:flex;gap:4px;align-items:center"></div><span id="nav-habit-label" style="font-size:9px;letter-spacing:1.4px;color:rgba(245,240,230,0.75);font-family:'Manrope',sans-serif;text-transform:lowercase">привычки</span></button>
   <div class="nav-spacer"></div>
   <div class="topnav-progress-wrap">
     <div class="topnav-bar"><div class="topnav-bar-fill" id="topnav-fill"></div></div>
@@ -2378,10 +2378,13 @@ function togglePh(id) {
 
 // ── Habit Tracker ─────────────────────────────────────────────────
 const DAILY_HABITS = [
-  'сделал(а) 1 фото сегодня',
-  'изучил(а) работу одного фотографа',
-  'посмотрел(а) 15 минут кино для насмотренности',
-  'записал(а) наблюдение или идею'
+  'выпить воду с лимоном',
+  'медитация',
+  'движение — прогулка, зарядка, йога',
+  'записать за что благодарен(а)',
+  'сделать фото / записать наблюдение',
+  'изучить работу одного фотографа',
+  'посмотреть кино для насмотренности'
 ];
 function getTodayKey() { return new Date().toISOString().slice(0,10); }
 function getStreak() {
@@ -2398,8 +2401,19 @@ function getStreak() {
   return streak;
 }
 function updateNavStreak() {
-  const el = document.getElementById('nav-streak');
-  if (el) el.textContent = '🔥 ' + getStreak();
+  const dotsEl = document.getElementById('nav-habit-dots');
+  const labelEl = document.getElementById('nav-habit-label');
+  if (!dotsEl) return;
+  const today = getTodayKey();
+  const done = S.habits[today] || [];
+  const allDone = done.length === DAILY_HABITS.length;
+  let html = '';
+  for (let i = 0; i < DAILY_HABITS.length; i++) {
+    const filled = done.includes(i);
+    html += '<div style="width:5px;height:5px;border-radius:50%;background:' + (filled ? '#cf93a8' : 'rgba(245,240,230,0.2)') + '"></div>';
+  }
+  dotsEl.innerHTML = html;
+  if (labelEl) labelEl.style.color = allDone ? '#cf93a8' : 'rgba(245,240,230,0.75)';
 }
 function toggleHabitsPanel() {
   const panel = document.getElementById('habits-panel');
