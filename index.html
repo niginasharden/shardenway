@@ -346,15 +346,17 @@ textarea:focus{border-color:#1e3a2c!important}
   <button class="nav-brand" style="background:none;border:none;cursor:pointer" onclick="goTo(-1);switchSection('course')"><div class="logo-stack"><span class="logo-main">SHARDEN</span><span class="logo-sub">— WAY —</span></div></button>
   <button class="nav-tab active" id="nav-course" onclick="switchSection('course')">курс</button>
   <button class="nav-tab" id="nav-watchlist" onclick="switchSection('watchlist')">база насмотренности</button>
+  <button class="nav-tab" id="nav-diary" onclick="switchSection('diary')">дневник</button>
+  <button class="nav-tab" id="nav-camera" onclick="switchSection('camera')">камера</button>
+  <button class="nav-tab" id="nav-habits" onclick="switchSection('habits')" style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;padding:0 14px;height:100%;border:none;background:none;cursor:pointer"><div id="nav-habit-dots" style="display:flex;gap:4px;align-items:center"></div><span id="nav-habit-label" style="font-size:9px;letter-spacing:1.4px;color:rgba(245,240,230,0.75);font-family:'Manrope',sans-serif;text-transform:lowercase">привычки</span></button>
   <button class="nav-tab" id="nav-contact" onclick="switchSection('contact')">связаться</button>
-  <button class="nav-tab" id="nav-habits" onclick="toggleHabitsPanel()" title="трекер привычек" style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;padding:0 14px;height:100%;border:none;background:none;cursor:pointer"><div id="nav-habit-dots" style="display:flex;gap:4px;align-items:center"></div><span id="nav-habit-label" style="font-size:9px;letter-spacing:1.4px;color:rgba(245,240,230,0.75);font-family:'Manrope',sans-serif;text-transform:lowercase">привычки</span></button>
   <div class="nav-spacer"></div>
   <div class="topnav-progress-wrap">
     <div class="topnav-bar"><div class="topnav-bar-fill" id="topnav-fill"></div></div>
     <div class="nav-progress" id="nav-pct"></div>
   </div>
 </div>
-<div id="habits-panel" style="display:none;position:fixed;top:52px;right:16px;z-index:200;width:320px;background:#f5f0e6;border:1px solid rgba(30,58,44,0.2);border-radius:14px;padding:18px;box-shadow:0 4px 20px rgba(0,0,0,0.12)"></div>
+<div id="habits-panel" style="display:none"></div>
 
 <!-- Shell -->
 <div id="shell">
@@ -404,6 +406,12 @@ textarea:focus{border-color:#1e3a2c!important}
   </div>
 
   <!-- Contact section -->
+  <div id="habits-section" style="display:none;flex:1;overflow:auto;flex-direction:column">
+  </div>
+  <div id="diary-section" style="display:none;flex:1;overflow:auto;flex-direction:column">
+  </div>
+  <div id="camera-section" style="display:none;flex:1;overflow:auto;flex-direction:column">
+  </div>
   <div id="contact-section" style="display:none;flex:1;overflow:hidden;flex-direction:column">
     <div class="contact-inner">
       <div class="contact-box">
@@ -1860,6 +1868,7 @@ const S = {
   openFilm: null,
   openPh:   null,
   habits:   _ls.get('sw2-habits', {}),
+  diary:    _ls.get('sw2-diary', {}),
   showAllWl: false
 };
 
@@ -1953,7 +1962,6 @@ function renderCourseComplete() {
   document.getElementById('mob-title').textContent = 'курс завершён';
   const html = `<div class="welcome-page">
     <div class="welcome-hero">
-      <div class="done-badge" style="margin-bottom:18px">✓ все 21 уровень пройдены 🎉</div>
       <div class="welcome-brand"><div class="logo-stack"><span class="logo-main">SHARDEN</span><span class="logo-sub">— WAY —</span></div></div>
       <h1 class="welcome-title">поздравляю — курс завершён</h1>
       <p class="welcome-sub">ты прошёл(а) весь путь: от взгляда — до профессии. 20 уровней, десятки заданий, разборы фильмов и фотографов, эксперименты со светом, цветом и стилем. это много честной работы, и она уже видна в том, как ты снимаешь и смотришь на кадр.</p>
@@ -2357,14 +2365,17 @@ function complete() {
 
 function switchSection(sec) {
   S.section = sec;
-  document.getElementById('nav-course').classList.toggle('active', sec==='course');
-  document.getElementById('nav-watchlist').classList.toggle('active', sec==='watchlist');
-  document.getElementById('nav-contact').classList.toggle('active', sec==='contact');
-  document.getElementById('course-section').style.display = sec==='course' ? 'flex' : 'none';
-  document.getElementById('watchlist-section').style.display = sec==='watchlist' ? 'flex' : 'none';
-  document.getElementById('contact-section').style.display = sec==='contact' ? 'flex' : 'none';
+  ['course','watchlist','habits','diary','camera','contact'].forEach(s => {
+    const btn = document.getElementById('nav-'+s);
+    if (btn) btn.classList.toggle('active', s===sec);
+    const el = document.getElementById(s+'-section');
+    if (el) el.style.display = s===sec ? (s==='course' ? 'flex' : 'block') : 'none';
+  });
   document.getElementById('sidebar').style.display = sec==='course' ? '' : 'none';
   if (sec==='watchlist') renderWatchlist();
+  if (sec==='habits') renderHabitsSection();
+  if (sec==='diary') renderDiary();
+  if (sec==='camera') renderCamera();
 }
 
 function setWlTab(t) { S.wlTab = t; renderWatchlist(); }
@@ -2464,15 +2475,192 @@ function renderHabitsPanel() {
   });
   const pct = done.length ? Math.round(done.length / DAILY_HABITS.length * 100) : 0;
   panel.innerHTML = `
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:14px">
+    <div style="margin-bottom:14px">
       <span style="font-size:11px;letter-spacing:1.5px;text-transform:uppercase;color:#8a7a6a;font-family:'Manrope',sans-serif">привычки на сегодня</span>
-      <span style="background:#1e3a2c;color:#f5f0e6;font-size:11px;font-weight:500;padding:3px 10px;border-radius:20px;font-family:'Manrope',sans-serif">🔥 ${streak} дней</span>
     </div>
     ${habitsHtml}
     <div style="margin:12px 0 4px;height:4px;background:rgba(30,58,44,.1);border-radius:2px;overflow:hidden"><div style="height:100%;width:${pct}%;background:#1e3a2c;border-radius:2px;transition:width .3s"></div></div>
     <div style="display:flex;justify-content:space-between;margin:10px 0 14px">${weekHtml}</div>
     <div style="font-size:11px;color:#8a7a6a;font-style:italic;font-family:'Manrope',sans-serif;padding-top:12px;border-top:.5px solid rgba(30,58,44,.12)">«фотография — это привычка видеть»</div>
   `;
+}
+
+// ── Habits Section (full page) ───────────────────────────────────
+function renderHabitsSection() {
+  const el = document.getElementById('habits-section');
+  if (!el) return;
+  const today = getTodayKey();
+  const done = S.habits[today] || [];
+  const now = new Date();
+  const days = ['пн','вт','ср','чт','пт','сб','вс'];
+  const dow = now.getDay();
+  const mondayOffset = dow === 0 ? -6 : 1 - dow;
+  let weekHtml = '';
+  for (let i = 0; i < 7; i++) {
+    const d2 = new Date(now);
+    d2.setDate(d2.getDate() + mondayOffset + i);
+    const key = d2.toISOString().slice(0,10);
+    const isToday = key === today;
+    const cls = isToday ? 'today' : (S.habits[key] && S.habits[key].length > 0 ? 'done' : 'empty');
+    weekHtml += `<div class="ht-day-col"><div class="ht-day-lbl">${days[i]}</div><div class="ht-day-dot ${cls}"></div></div>`;
+  }
+  let habitsHtml = '';
+  DAILY_HABITS.forEach((h, i) => {
+    const isDone = done.includes(i);
+    habitsHtml += `<div class="ht-item" onclick="toggleHabitSection(${i})" style="cursor:pointer;display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:0.5px solid rgba(30,58,44,.08)">
+      <div class="ht-circle ${isDone ? 'done' : ''}"></div>
+      <span class="ht-label ${isDone ? 'done' : ''}" style="font-size:14px">${h}</span>
+    </div>`;
+  });
+  const pct = done.length ? Math.round(done.length / DAILY_HABITS.length * 100) : 0;
+  el.innerHTML = `
+  <div style="max-width:520px;margin:0 auto;padding:32px 24px;">
+    <p style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#8a7a6a;font-family:'Manrope',sans-serif;margin:0 0 8px">ежедневный ритуал</p>
+    <h2 style="font-family:'Playfair Display',serif;font-size:24px;color:#1e3a2c;margin:0 0 6px;font-weight:400">привычки</h2>
+    <p style="font-size:12px;color:#8a7a6a;font-family:'Manrope',sans-serif;margin:0 0 28px">отмечай каждый день</p>
+    <div style="margin-bottom:20px;height:4px;background:rgba(30,58,44,.08);border-radius:2px;overflow:hidden">
+      <div style="height:100%;width:${pct}%;background:#1e3a2c;border-radius:2px;transition:width .3s"></div>
+    </div>
+    <div style="margin-bottom:24px">${habitsHtml}</div>
+    <div style="display:flex;justify-content:space-between;margin-bottom:32px;padding:16px 0;border-top:0.5px solid rgba(30,58,44,.1)">${weekHtml}</div>
+    <p style="font-size:12px;color:#8a7a6a;font-style:italic;font-family:'Manrope',sans-serif;text-align:center">«фотография — это привычка видеть»</p>
+  </div>`;
+}
+function toggleHabitSection(idx) {
+  toggleHabit(idx);
+  renderHabitsSection();
+}
+
+// ── Diary ────────────────────────────────────────────────────────
+function getDiaryWeekKey() {
+  const d = new Date();
+  const day = d.getDay() || 7;
+  const mon = new Date(d); mon.setDate(d.getDate() - day + 1);
+  return mon.toISOString().slice(0,10);
+}
+function saveDiary() {
+  const wk = getDiaryWeekKey();
+  if (!S.diary) S.diary = {};
+  S.diary[wk] = {
+    general: document.getElementById('diary-general')?.value || '',
+    wins:    document.getElementById('diary-wins')?.value || '',
+    hard:    document.getElementById('diary-hard')?.value || '',
+    question:document.getElementById('diary-question')?.value || ''
+  };
+  _ls.set('sw2-diary', S.diary);
+}
+async function sendDiary() {
+  saveDiary();
+  const wk = getDiaryWeekKey();
+  const d = S.diary[wk] || {};
+  if (!d.general && !d.wins && !d.hard) {
+    alert('напиши хотя бы несколько слов :)'); return;
+  }
+  const btn = document.getElementById('diary-send-btn');
+  if (btn) { btn.textContent = 'отправляю...'; btn.disabled = true; }
+  const name = S.studentName || 'студент';
+  const tg = S.studentTg || '';
+  const text = `📓 дневник недели · ${wk}\n👤 ${name}${tg ? ' (@'+tg+')' : ''}\n\n🗓 как прошла неделя:\n${d.general||'—'}\n\n✅ что получилось:\n${d.wins||'—'}\n\n😤 что было сложно:\n${d.hard||'—'}\n\n💬 вопрос/мысль:\n${d.question||'—'}`;
+  try {
+    const TG_TOKEN = '7560527101:AAFj7DFiI3R9djPJSV1ydTluJsOK0qacPCA';
+    const TG_CHAT  = '-1002661834947';
+    await fetch(`https://api.telegram.org/bot${TG_TOKEN}/sendMessage`, {
+      method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({ chat_id: TG_CHAT, text, parse_mode:'HTML' })
+    });
+    if (btn) { btn.textContent = 'отправлено ✓'; }
+    const sentEl = document.getElementById('diary-sent-note');
+    if (sentEl) sentEl.style.display = 'block';
+  } catch(e) {
+    if (btn) { btn.textContent = 'отправить дневник →'; btn.disabled = false; }
+    alert('не удалось отправить, попробуй ещё раз');
+  }
+}
+function renderDiary() {
+  const el = document.getElementById('diary-section');
+  if (!el) return;
+  const wk = getDiaryWeekKey();
+  if (!S.diary) S.diary = _ls.get('sw2-diary', {});
+  const saved = S.diary[wk] || {};
+  const now = new Date();
+  const dow = now.getDay() || 7;
+  const daysLeft = 7 - dow;
+  const daysLeftText = daysLeft === 0 ? 'последний день' : `осталось ${daysLeft} ${daysLeft===1?'день':daysLeft<5?'дня':'дней'}`;
+  el.innerHTML = `
+  <div style="max-width:600px;margin:0 auto;padding:32px 24px;">
+    <p style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#8a7a6a;font-family:'Manrope',sans-serif;margin:0 0 8px">дневник недели</p>
+    <div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:28px">
+      <h2 style="font-family:'Playfair Display',serif;font-size:24px;color:#1e3a2c;margin:0;font-weight:400">неделя с ${wk}</h2>
+      <span style="font-size:11px;background:#eaf3ec;color:#3b6d11;padding:3px 12px;border-radius:20px;font-family:'Manrope',sans-serif">${daysLeftText}</span>
+    </div>
+    <div style="display:flex;flex-direction:column;gap:18px;">
+      <div>
+        <p style="font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:#8a7a6a;font-family:'Manrope',sans-serif;margin:0 0 8px">как прошла неделя?</p>
+        <textarea id="diary-general" oninput="saveDiary()" placeholder="расскажи свободно — что было хорошего, что сложного, что заметил(а)..." style="width:100%;box-sizing:border-box;height:100px;font-family:'Caveat',cursive;font-size:17px;color:#2a2a2a;border:0.5px solid rgba(30,58,44,0.2);border-radius:8px;padding:12px 14px;background:#fdfaf5;resize:none;outline:none;line-height:1.6">${esc(saved.general||'')}</textarea>
+      </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">
+        <div>
+          <p style="font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:#8a7a6a;font-family:'Manrope',sans-serif;margin:0 0 8px">что получилось</p>
+          <textarea id="diary-wins" oninput="saveDiary()" placeholder="+ ..." style="width:100%;box-sizing:border-box;height:80px;font-family:'Caveat',cursive;font-size:16px;color:#2a2a2a;border:0.5px solid rgba(30,58,44,0.2);border-radius:8px;padding:10px 12px;background:#fdfaf5;resize:none;outline:none;">${esc(saved.wins||'')}</textarea>
+        </div>
+        <div>
+          <p style="font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:#8a7a6a;font-family:'Manrope',sans-serif;margin:0 0 8px">что было сложно</p>
+          <textarea id="diary-hard" oninput="saveDiary()" placeholder="— ..." style="width:100%;box-sizing:border-box;height:80px;font-family:'Caveat',cursive;font-size:16px;color:#2a2a2a;border:0.5px solid rgba(30,58,44,0.2);border-radius:8px;padding:10px 12px;background:#fdfaf5;resize:none;outline:none;">${esc(saved.hard||'')}</textarea>
+        </div>
+      </div>
+      <div>
+        <p style="font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:#8a7a6a;font-family:'Manrope',sans-serif;margin:0 0 8px">вопрос или мысль для нигины</p>
+        <textarea id="diary-question" oninput="saveDiary()" placeholder="необязательно..." style="width:100%;box-sizing:border-box;height:64px;font-family:'Caveat',cursive;font-size:16px;color:#2a2a2a;border:0.5px solid rgba(30,58,44,0.2);border-radius:8px;padding:10px 12px;background:#fdfaf5;resize:none;outline:none;">${esc(saved.question||'')}</textarea>
+      </div>
+      <button id="diary-send-btn" onclick="sendDiary()" style="width:100%;padding:13px;border:none;border-radius:8px;font-size:11px;letter-spacing:.8px;background:linear-gradient(135deg,#cf93a8,#1e3a2c);color:#f5f0e6;font-family:'Manrope',sans-serif;cursor:pointer;text-transform:lowercase">отправить дневник →</button>
+      <p id="diary-sent-note" style="display:none;font-size:12px;color:#3a6b4a;font-family:'Manrope',sans-serif;text-align:center;font-style:italic">дневник отправлен — нигина прочитает на этой неделе ✓</p>
+    </div>
+  </div>`;
+}
+
+// ── Camera guide ──────────────────────────────────────────────────
+const CAMERA_SITUATIONS = [
+  {
+    label: 'улица · день', title: 'яркое солнце', color: '#f5c242', tcolor: '#BA7517',
+    iso: '100', shutter: '1/1000 – 1/2000', aperture: 'f/1.8 – f/2.8',
+    tip: 'ищи тень — снимай в ней, а не на прямом солнце'
+  },
+  {
+    label: 'вечер · закат', title: 'золотой час', color: '#cf93a8', tcolor: '#993556',
+    iso: '100', shutter: '1/80 – 1/500', aperture: 'f/1.8 – f/2.8',
+    tip: 'снимай навстречу свету или сбоку — не против'
+  },
+  {
+    label: 'облачно', title: 'пасмурный день', color: '#9FE1CB', tcolor: '#0F6E56',
+    iso: '200 – 400', shutter: '1/250 – 1/500', aperture: 'f/1.8 – f/2.8',
+    tip: 'открытая диафрагма размоет фон — отличный свет для портрета'
+  },
+  {
+    label: 'темно · ночь', title: 'низкий свет', color: '#B4B2A9', tcolor: '#5F5E5A',
+    iso: '1600 – 6400', shutter: '1/80 – 1/100', aperture: 'f/1.8 – f/2.8',
+    tip: 'упри камеру — зернистость это не ошибка, это атмосфера'
+  }
+];
+function renderCamera() {
+  const el = document.getElementById('camera-section');
+  if (!el) return;
+  const cards = CAMERA_SITUATIONS.map(s => `
+    <div style="background:#ffffff;border:0.5px solid rgba(30,58,44,0.15);border-left:3px solid ${s.color};border-radius:0 14px 14px 0;padding:18px 20px;">
+      <p style="font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:${s.tcolor};font-family:'Manrope',sans-serif;margin:0 0 4px">${s.label}</p>
+      <p style="font-family:'Playfair Display',serif;font-size:16px;color:#1e3a2c;margin:0 0 12px;font-weight:400">${s.title}</p>
+      ${[['ISO',s.iso],['выдержка',s.shutter],['диафрагма',s.aperture],['режим','M']].map(([k,v])=>`
+      <div style="display:flex;justify-content:space-between;font-size:12px;font-family:'Manrope',sans-serif;padding:4px 0;border-bottom:0.5px solid rgba(30,58,44,0.07)">
+        <span style="color:#8a7a6a">${k}</span><span style="color:#1e3a2c;font-weight:500">${v}</span>
+      </div>`).join('')}
+      <p style="font-size:11px;color:#8a7a6a;font-family:'Manrope',sans-serif;margin:10px 0 0;line-height:1.5;font-style:italic">${s.tip}</p>
+    </div>`).join('');
+  el.innerHTML = `
+  <div style="max-width:640px;margin:0 auto;padding:32px 24px;">
+    <p style="font-size:10px;letter-spacing:2px;text-transform:uppercase;color:#8a7a6a;font-family:'Manrope',sans-serif;margin:0 0 8px">справочник</p>
+    <h2 style="font-family:'Playfair Display',serif;font-size:24px;color:#1e3a2c;margin:0 0 28px;font-weight:400">как снимать</h2>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;">${cards}</div>
+    <p style="font-size:12px;color:#8a7a6a;font-family:'Manrope',sans-serif;margin:24px 0 0;text-align:center;font-style:italic">контент раздела будет дополняться</p>
+  </div>`;
 }
 
 // ── Watchlist send to Telegram ────────────────────────────────────
