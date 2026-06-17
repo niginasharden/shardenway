@@ -27,6 +27,19 @@ textarea:focus{border-color:#1e3a2c!important}
 .logo-main{font-family:'Playfair Display',serif;font-weight:700;line-height:1}
 .logo-sub{font-family:'Manrope',sans-serif;font-weight:500;line-height:1;opacity:.7}
 .nav-brand{color:#f5f0e6;margin-right:28px;white-space:nowrap}
+.ht-item{display:flex;align-items:center;gap:10px;padding:8px 0;cursor:pointer;border-bottom:.5px solid rgba(30,58,44,.12)}
+.ht-item:last-of-type{border-bottom:none}
+.ht-circle{width:20px;height:20px;border-radius:50%;border:1.5px solid #1e3a2c;flex-shrink:0;transition:background .15s;position:relative}
+.ht-circle.done{background:#1e3a2c}
+.ht-circle.done::after{content:'✓';position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);color:#f5f0e6;font-size:10px;line-height:1}
+.ht-label{font-size:13px;color:#2a2a2a;font-family:'Manrope',sans-serif}
+.ht-label.done{text-decoration:line-through;color:#8a7a6a}
+.ht-day-col{text-align:center;flex:1}
+.ht-day-lbl{font-size:9px;color:#8a7a6a;text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+.ht-day-dot{width:20px;height:20px;border-radius:50%;margin:0 auto}
+.ht-day-dot.done{background:#1e3a2c}
+.ht-day-dot.today{background:#cf93a8}
+.ht-day-dot.empty{background:rgba(30,58,44,.08);border:.5px solid rgba(30,58,44,.2)}
 .nav-brand .logo-main{font-size:13px;letter-spacing:2px}
 .nav-brand .logo-sub{font-size:8px;letter-spacing:3px;margin-top:2px}
 .nav-tab{padding:0 18px;height:48px;border:none;background:none;color:#a89e8f;font-size:11px;letter-spacing:.8px;border-bottom:2px solid transparent;margin-bottom:-1px;text-transform:lowercase}
@@ -334,12 +347,14 @@ textarea:focus{border-color:#1e3a2c!important}
   <button class="nav-tab active" id="nav-course" onclick="switchSection('course')">курс</button>
   <button class="nav-tab" id="nav-watchlist" onclick="switchSection('watchlist')">база насмотренности</button>
   <button class="nav-tab" id="nav-contact" onclick="switchSection('contact')">связаться</button>
+  <button class="nav-tab" id="nav-habits" onclick="toggleHabitsPanel()" title="трекер привычек" style="font-size:11px;letter-spacing:.5px"><span id="nav-streak">🔥 0</span></button>
   <div class="nav-spacer"></div>
   <div class="topnav-progress-wrap">
     <div class="topnav-bar"><div class="topnav-bar-fill" id="topnav-fill"></div></div>
     <div class="nav-progress" id="nav-pct"></div>
   </div>
 </div>
+<div id="habits-panel" style="display:none;position:fixed;top:52px;right:16px;z-index:200;width:320px;background:#f5f0e6;border:1px solid rgba(30,58,44,0.2);border-radius:14px;padding:18px;box-shadow:0 4px 20px rgba(0,0,0,0.12)"></div>
 
 <!-- Shell -->
 <div id="shell">
@@ -1101,6 +1116,155 @@ const MODULES = [{
     photo: true
   }]
 }, {
+  id: 21,
+  emoji: "🤸",
+  title: "позирование и работа с моделью",
+  level: "mid",
+  section: null,
+  sub: "как направлять человека в кадре, команды, позы, группы",
+  theory: [{
+    h: "почему позирование — это работа фотографа, а не модели",
+    b: "многие фотографы ждут что человек сам «войдёт в образ». это не работает.
+
+позирование — твоя ответственность. ты режиссёр. человек перед камерой не знает как выглядит — ты знаешь.
+
+три роли фотографа во время съёмки:
+→ технический исполнитель: контролирует свет, фокус, ракурс
+→ режиссёр: направляет позу, взгляд, движение
+→ психолог: создаёт атмосферу доверия
+
+если ты молчишь и только нажимаешь кнопку — человек напрягается и это видно на снимке."
+  }, {
+    h: "базовые принципы позы: тело как линия",
+    b: "несколько правил которые работают всегда:
+
+→ угол лучше прямого: тело под углом к камере выглядит стройнее и динамичнее
+→ вес на одну ногу: убирает деревянность, добавляет естественность
+→ руки — главная проблема: безжизненные руки вдоль тела убивают любой снимок. давай им задачу
+→ подбородок чуть вперёд и вниз: убирает второй подбородок, добавляет взгляду силу
+→ пространство между руками и телом: прижатые руки «склеивают» силуэт — всегда оставляй зазор
+
+основное правило: если что-то в позе кажется неловким на снимке — это неловко и в жизни. исправляй сразу."
+  }, {
+    h: "как давать команды: язык направления",
+    b: "плохая команда: «встань красиво» — человек не знает что это
+хорошая команда: «перенеси вес на правую ногу, левую чуть выдвини вперёд»
+
+принципы хороших команд:
+→ конкретно и про тело: «подними левое плечо», «наклони голову вправо», «посмотри на 2 часа»
+→ показывай сам(а): многие понимают лучше глазами чем ушами
+→ говори про ощущение: «представь что тянешься макушкой вверх» — работает лучше чем «выпрямись»
+→ хвали промежуточные результаты: «вот так — хорошо, а теперь чуть больше»
+
+создай список из 10–15 своих команд которые работают — и используй их каждую съёмку."
+  }, {
+    h: "мужчины и женщины: разный подход",
+    b: "нет жёстких правил — но есть тенденции которые помогают:
+
+для женских съёмок:
+→ S-линия работает: изгиб в талии, бедра под углом
+→ движение оживляет: шаг, поворот, игра с волосами
+→ мягкие жесты рук: касание лица, волос, одежды
+
+для мужских съёмок:
+→ открытая, уверенная стойка: ноги чуть шире плеч
+→ меньше «украшений»: руки в карманах, скрещены на груди — работают
+→ взгляд имеет огромное значение: куда смотрит человек меняет всё
+
+для любого человека:
+→ начинай с удобного — потом двигайся к интересному
+→ задавай контекст: «ты стоишь у окна и смотришь на улицу» — человек создаёт позу сам",
+    q: {
+      t: "лучшая поза — та которую человек не замечает что принимает.",
+      s: "из практики портретной съёмки"
+    }
+  }, {
+    h: "группы и два человека",
+    b: "съёмка нескольких людей — особый навык.
+
+проблема: когда несколько человек стоят рядом, они начинают повторять позы друг друга и выглядят как шеренга.
+
+решения:
+→ разные уровни: кто-то стоит, кто-то сидит, кто-то наклоняется
+→ контакт между людьми: прикосновение, взгляд друг на друга — создаёт историю
+→ треугольник: физическое расположение людей треугольником даёт динамику
+→ один фокус: направь внимание всех на что-то — они автоматически повернутся и поза оживёт
+
+для пар: расстояние между людьми говорит о характере отношений. играй с ним."
+  }],
+  tasks: [{
+    t: "10 поз — 5 работают, 5 нет",
+    d: "сними одного человека в 10 разных позах.
+
+правило: не подсказывай какие из них «правильные».
+
+потом:
+→ выбери 5 которые работают — напиши почему
+→ выбери 5 которые не работают — напиши почему
+
+загрузи все 10 кадров и разбор.",
+    g: "умение видеть что работает в позе — это отдельный навык. его нужно тренировать.",
+    photo: true
+  }, {
+    t: "создай свой список команд",
+    d: "напиши список из 10 конкретных команд которые ты будешь использовать на съёмках:
+
+→ 3 команды для положения тела
+→ 3 команды для рук
+→ 2 команды для головы и взгляда
+→ 2 команды для создания движения
+
+для каждой напиши:
+— что ты говоришь
+— какой результат получаешь
+
+потом протестируй на следующей съёмке.",
+    g: "свой язык направления — то что отличает уверенного фотографа от неуверенного.",
+    photo: false
+  }, {
+    t: "три образа одного человека",
+    d: "сними одного и того же человека в трёх совершенно разных образах:
+→ официальный портрет (деловой, собранный)
+→ лайфстайл (расслабленный, живой)
+→ художественный (концептуальный, необычный)
+
+для каждого образа опиши:
+— как менялась поза
+— как менялись твои команды
+— что было сложнее всего
+
+загрузи лучший кадр из каждого образа.",
+    g: "один человек — три истории. это и есть работа фотографа.",
+    photo: true
+  }, {
+    t: "групповая съёмка",
+    d: "сними группу из трёх и более людей.
+
+задача: создать снимок где все выглядят живыми, а не шеренгой.
+
+после съёмки напиши:
+→ что было самым сложным
+→ какие команды сработали
+→ что бы ты сделал(а) иначе
+
+загрузи лучший кадр и разбор.",
+    g: "группа — это управление несколькими людьми одновременно. это навык который строится через практику.",
+    photo: true
+  }],
+  quiz: [{
+    q: "человек перед камерой скованный и не знает что делать с руками. твои первые действия?",
+    options: ["попросить его расслабиться и вести себя естественно", "дать конкретную задачу: «положи правую руку на плечо, левую в карман»", "начать снимать и надеяться что само пройдёт"],
+    correct: 1
+  }, {
+    q: "почему вес на одну ногу улучшает позу?",
+    options: ["это делает человека выше", "убирает симметричную деревянность, добавляет естественный изгиб", "так снимают все профессиональные фотографы"],
+    correct: 1
+  }, {
+    q: "как снять группу чтобы она не выглядела как шеренга?",
+    options: ["поставить всех на одном уровне", "попросить всех смотреть прямо в камеру", "использовать разные уровни и физический контакт между людьми"],
+    correct: 2
+  }]
+}, {
   id: 20,
   emoji: "",
   title: "как предлагать творческие съёмки",
@@ -1750,6 +1914,17 @@ const PHOTOGRAPHERS = [{
   why: "Американский фотограф, который снимал тело как скульптуру — резкий контровой свет, чёрно-белая печать, силуэты на фоне пустыни или студии. Каждый кадр выглядит как мрамор — монументально и чувственно одновременно.",
   tasks: ["Риттс часто снимал тело контровым светом так, что оно превращалось в силуэт или скульптуру. Сними портрет с контровым светом — пусть форма победит детали. Загрузи.", "Его лучшие кадры сняты на природе — пустыня, пляж, простой пейзаж — без декораций. Сними портрет на открытом пространстве, используя только то, что есть вокруг.", "Риттс печатал чёрно-белое с глубоким контрастом. Переведи один свой цветной портрет в чёрно-белый с сильным контрастом — что меняется в восприятии?"]
 }];
+const MODULE_WL = {
+  1: { films:[0,1], phs:['lindbergh','avedon','leibovitz','penn','ritts','newton','roversi','crewdson','aitken'] },
+  2: { films:[2,3], phs:['sherman','moriyama','goldin','tylermitchell','petracollins','bourdin'] },
+  3: { films:[4,5], phs:['timwalker','lachapelle','jansson','teller','meisel','viviennesassen','harleyweir','renellmedrano'] }
+};
+function getModuleNum(idx) {
+  if (idx < 0) return null;
+  if (idx <= 9) return 1;
+  if (idx <= 16) return 2;
+  return 3;
+}
 </script>
 <script>
 // ── localStorage ──────────────────────────────────────────────────
@@ -1771,7 +1946,9 @@ const S = {
   section:  'course',
   wlTab:    'films',
   openFilm: null,
-  openPh:   null
+  openPh:   null,
+  habits:   _ls.get('sw2-habits', {}),
+  showAllWl: false
 };
 
 function save() {
@@ -1781,6 +1958,7 @@ function save() {
   _ls.set('sw2-answers', S.answers);
   _ls.set('sw2-quiz', S.quiz);
   _ls.set('sw2-tracker', S.tracker);
+  _ls.set('sw2-habits', S.habits);
 }
 
 const tkey = (mi,ti) => `${mi}-${ti}`;
@@ -1837,7 +2015,7 @@ function renderWelcome() {
       <div class="welcome-hero2-text">
         <div class="welcome-greeting">привет, готов(а)?</div>
         <h1 class="welcome-hero2-title">новый уровень — ${esc(nextM.title)}</h1>
-        <p class="welcome-hero2-sub">${lessonsCnt} ${plural(lessonsCnt,'урок','урока','уроков')} · ${tasksCnt} ${plural(tasksCnt,'задание','задания','заданий')}</p>
+        <p class="welcome-hero2-sub">модуль ${nextIdx < 10 ? 1 : nextIdx < 16 ? 2 : 3}</p>
         <button class="welcome-hero2-btn" onclick="goTo(${nextIdx})">начать →</button>
       </div>
       <div class="welcome-hero2-art"><img src="hero-photo.jpg" alt=""></div>
@@ -1863,7 +2041,7 @@ function renderCourseComplete() {
   document.getElementById('mob-title').textContent = 'курс завершён';
   const html = `<div class="welcome-page">
     <div class="welcome-hero">
-      <div class="done-badge" style="margin-bottom:18px">✓ все 20 уровней пройдены 🎉</div>
+      <div class="done-badge" style="margin-bottom:18px">✓ все 21 уровень пройдены 🎉</div>
       <div class="welcome-brand"><div class="logo-stack"><span class="logo-main">SHARDEN</span><span class="logo-sub">— WAY —</span></div></div>
       <h1 class="welcome-title">поздравляю — курс завершён</h1>
       <p class="welcome-sub">ты прошёл(а) весь путь: от взгляда — до профессии. 20 уровней, десятки заданий, разборы фильмов и фотографов, эксперименты со светом, цветом и стилем. это много честной работы, и она уже видна в том, как ты снимаешь и смотришь на кадр.</p>
@@ -2096,13 +2274,24 @@ function renderContent() {
 
 // ── Watchlist ─────────────────────────────────────────────────────
 function renderWatchlist() {
-  let html = `<div class="wl-tabs-bar">
-    <button class="wl-tab${S.wlTab==='films'?' active':''}" onclick="setWlTab('films')">фильмы (${FILM_BLOCKS.reduce((a,b)=>a+b.films.length,0)})</button>
-    <button class="wl-tab${S.wlTab==='photographers'?' active':''}" onclick="setWlTab('photographers')">фотографы (${PHOTOGRAPHERS.length})</button>
-  </div>`;
+  const modNum = getModuleNum(S.cur);
+  const wl = modNum ? MODULE_WL[modNum] : null;
+  const showAll = S.showAllWl;
+  const filmBlocks = (wl && !showAll) ? FILM_BLOCKS.filter((_,i) => wl.films.includes(i)) : FILM_BLOCKS;
+  const photographers = (wl && !showAll) ? PHOTOGRAPHERS.filter(ph => wl.phs.includes(ph.id)) : PHOTOGRAPHERS;
+  const filmCount = filmBlocks.reduce((a,b) => a+b.films.length, 0);
+  const phCount = photographers.length;
+
+  let html = `<div class="wl-tabs-bar" style="display:flex;align-items:center;flex-wrap:wrap;gap:4px">
+    <button class="wl-tab${S.wlTab==='films'?' active':''}" onclick="setWlTab('films')">фильмы (${filmCount})</button>
+    <button class="wl-tab${S.wlTab==='photographers'?' active':''}" onclick="setWlTab('photographers')">фотографы (${phCount})</button>
+    <div style="flex:1"></div>
+    ${wl ? `<button onclick="S.showAllWl=!S.showAllWl;renderWatchlist()" style="font-size:10px;letter-spacing:.8px;background:none;border:.5px solid rgba(30,58,44,.3);border-radius:20px;padding:3px 10px;cursor:pointer;color:#5a6a5a;font-family:'Manrope',sans-serif">${showAll ? 'только модуль '+modNum : 'показать всё'}</button>` : ''}
+  </div>
+  ${wl && !showAll ? `<div style="font-size:11px;color:#8a7a6a;margin:-4px 0 12px;font-family:'Manrope',sans-serif;letter-spacing:.3px">база насмотренности для модуля ${modNum}</div>` : ''}`;
 
   if (S.wlTab === 'films') {
-    FILM_BLOCKS.forEach(block => {
+    filmBlocks.forEach(block => {
       html += `<div class="wl-block-header">
         <div class="wl-section-title">${esc(block.title)}</div>
         <div class="wl-section-desc">${esc(block.desc)}</div>
@@ -2136,7 +2325,7 @@ function renderWatchlist() {
     });
   } else {
     html += `<div class="ph-grid">`;
-    PHOTOGRAPHERS.forEach(ph => {
+    photographers.forEach(ph => {
       const isOpen = S.openPh === ph.id;
       html += `<div class="ph-card${isOpen?' open':''}" onclick="togglePh('${ph.id}')">
         <div class="ph-cat">${esc(ph.category)}</div>
@@ -2494,6 +2683,7 @@ async function uploadPhoto(input, ti) {
 checkAuth();
 renderSidebar();
 renderContent();
+updateNavStreak();
 
 // ── PWA: регистрация service worker ─────────────────────────────
 if ('serviceWorker' in navigator) {
