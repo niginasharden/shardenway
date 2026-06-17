@@ -345,10 +345,10 @@ textarea:focus{border-color:#1e3a2c!important}
 <div id="topnav">
   <button class="nav-brand" style="background:none;border:none;cursor:pointer" onclick="goTo(-1);switchSection('course')"><div class="logo-stack"><span class="logo-main">SHARDEN</span><span class="logo-sub">— WAY —</span></div></button>
   <button class="nav-tab active" id="nav-course" onclick="switchSection('course')">курс</button>
-  <button class="nav-tab" id="nav-watchlist" onclick="switchSection('watchlist')">база насмотренности</button>
-  <button class="nav-tab" id="nav-diary" onclick="switchSection('diary')">дневник</button>
   <button class="nav-tab" id="nav-camera" onclick="switchSection('camera')">камера</button>
+  <button class="nav-tab" id="nav-watchlist" onclick="switchSection('watchlist')">база насмотренности</button>
   <button class="nav-tab" id="nav-habits" onclick="switchSection('habits')" style="display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;padding:0 14px;height:100%;border:none;background:none;cursor:pointer"><div id="nav-habit-dots" style="display:flex;gap:4px;align-items:center"></div><span id="nav-habit-label" style="font-size:9px;letter-spacing:1.4px;color:rgba(245,240,230,0.75);font-family:'Manrope',sans-serif;text-transform:lowercase">привычки</span></button>
+  <button class="nav-tab" id="nav-diary" onclick="switchSection('diary')">дневник</button>
   <button class="nav-tab" id="nav-contact" onclick="switchSection('contact')">связаться</button>
   <div class="nav-spacer"></div>
   <div class="topnav-progress-wrap">
@@ -449,7 +449,7 @@ const MODULES = [{
   emoji: "👁",
   title: "как смотрит фотограф",
   level: "base",
-  section: "модуль 1 — видеть",
+  section: "видеть",
   sub: "насмотренность, визуальное мышление, источники вдохновения",
   theory: [{
     h: "разница между смотреть и видеть",
@@ -507,6 +507,7 @@ const MODULES = [{
   id: 2,
   emoji: "💡",
   title: "свет: теория",
+  section: "свет и композиция",
   level: "base",
   section: null,
   sub: "характер света, направление, температура — как свет создаёт ощущение",
@@ -594,7 +595,7 @@ const MODULES = [{
   emoji: "🧍",
   title: "портретная съёмка",
   level: "base",
-  section: null,
+  section: "работа с людьми",
   sub: "работа с человеком: контакт, позирование, образ",
   theory: [{
     h: "главная проблема: люди не умеют позировать",
@@ -786,7 +787,7 @@ const MODULES = [{
   emoji: "🎨",
   title: "обработка и ретушь",
   level: "base",
-  section: null,
+  section: "обработка",
   sub: "философия обработки, цветокоррекция, ретушь — когда останавливаться",
   theory: [{
     h: "обработка — это продолжение съёмки",
@@ -966,7 +967,7 @@ const MODULES = [{
   emoji: "🤝",
   title: "клиент: от заявки до результата",
   level: "mid",
-  section: "модуль 2 — работать с людьми",
+  section: "клиент и бизнес",
   sub: "бриф, коммуникация, управление ожиданиями, сдача работы",
   theory: [{
     h: "большинство проблем с клиентами — это проблемы коммуникации",
@@ -1259,7 +1260,7 @@ const MODULES = [{
   emoji: "💰",
   title: "ценообразование",
   level: "pro",
-  section: "модуль 3 — строить бизнес",
+  section: "личный бренд",
   sub: "как считать стоимость, почему дёшево убивает карьеру, как повышать чек",
   theory: [{
     h: "почему фотографы берут мало",
@@ -2194,11 +2195,8 @@ function renderContent() {
 
 // ── Watchlist ─────────────────────────────────────────────────────
 function renderWatchlist() {
-  const modNum = getModuleNum(S.cur);
-  const wl = modNum ? MODULE_WL[modNum] : null;
-  const showAll = S.showAllWl;
-  const filmBlocks = (wl && !showAll) ? FILM_BLOCKS.filter((_,i) => wl.films.includes(i)) : FILM_BLOCKS;
-  const photographers = (wl && !showAll) ? PHOTOGRAPHERS.filter(ph => wl.phs.includes(ph.id)) : PHOTOGRAPHERS;
+  const filmBlocks = FILM_BLOCKS;
+  const photographers = PHOTOGRAPHERS;
   const filmCount = filmBlocks.reduce((a,b) => a+b.films.length, 0);
   const phCount = photographers.length;
 
@@ -2609,11 +2607,11 @@ function renderDiary() {
         </div>
       </div>
       <div>
-        <p style="font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:#8a7a6a;font-family:'Manrope',sans-serif;margin:0 0 8px">вопрос или мысль для нигины</p>
+        <p style="font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:#8a7a6a;font-family:'Manrope',sans-serif;margin:0 0 8px">вопрос или мысль для Нигины</p>
         <textarea id="diary-question" oninput="saveDiary()" placeholder="необязательно..." style="width:100%;box-sizing:border-box;height:64px;font-family:'Caveat',cursive;font-size:16px;color:#2a2a2a;border:0.5px solid rgba(30,58,44,0.2);border-radius:8px;padding:10px 12px;background:#fdfaf5;resize:none;outline:none;">${esc(saved.question||'')}</textarea>
       </div>
       <button id="diary-send-btn" onclick="sendDiary()" style="width:100%;padding:13px;border:none;border-radius:8px;font-size:11px;letter-spacing:.8px;background:linear-gradient(135deg,#cf93a8,#1e3a2c);color:#f5f0e6;font-family:'Manrope',sans-serif;cursor:pointer;text-transform:lowercase">отправить дневник →</button>
-      <p id="diary-sent-note" style="display:none;font-size:12px;color:#3a6b4a;font-family:'Manrope',sans-serif;text-align:center;font-style:italic">дневник отправлен — нигина прочитает на этой неделе ✓</p>
+      <p id="diary-sent-note" style="display:none;font-size:12px;color:#3a6b4a;font-family:'Manrope',sans-serif;text-align:center;font-style:italic">дневник отправлен — Нигина прочитает на этой неделе ✓</p>
     </div>
   </div>`;
 }
