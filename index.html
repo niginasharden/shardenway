@@ -2371,7 +2371,7 @@ function switchSection(sec) {
     const btn = document.getElementById('nav-'+s);
     if (btn) btn.classList.toggle('active', s===sec);
     const el = document.getElementById(s+'-section');
-    if (el) el.style.display = s===sec ? (s==='course' ? 'flex' : 'block') : 'none';
+    if (el) el.style.display = s===sec ? 'flex' : 'none';
   });
   document.getElementById('sidebar').style.display = sec==='course' ? '' : 'none';
   if (sec==='watchlist') renderWatchlist();
